@@ -37,16 +37,12 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.panelTopBorder = new System.Windows.Forms.Panel();
             this.panelLeft = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.panelRight = new System.Windows.Forms.Panel();
             this.panelBottom = new System.Windows.Forms.Panel();
             this.panelLeftTop = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelTop = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
-            this.MinimizeButton = new login.ButtonZ();
-            this.MaxButton = new login.MinMaxButton();
-            this.CloserButton = new login.ButtonZ();
             this.WindowTextLabel = new System.Windows.Forms.Label();
             this.panelLogout = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -101,7 +97,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboSearch = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.panelLeft.SuspendLayout();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.MinimizeButton = new login.ButtonZ();
+            this.MaxButton = new login.MinMaxButton();
+            this.CloserButton = new login.ButtonZ();
             this.panelLeftTop.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_RecentChanges)).BeginInit();
@@ -127,7 +126,6 @@
             // panelLeft
             // 
             this.panelLeft.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(34)))), ((int)(((byte)(34)))));
-            this.panelLeft.Controls.Add(this.panel2);
             this.panelLeft.Cursor = System.Windows.Forms.Cursors.SizeWE;
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 3);
@@ -137,15 +135,6 @@
             this.panelLeft.MouseDown += new System.Windows.Forms.MouseEventHandler(this.LeftPanel_MouseDown);
             this.panelLeft.MouseMove += new System.Windows.Forms.MouseEventHandler(this.LeftPanel_MouseMove);
             this.panelLeft.MouseUp += new System.Windows.Forms.MouseEventHandler(this.LeftPanel_MouseUp);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.Gray;
-            this.panel2.Location = new System.Drawing.Point(1, 77);
-            this.panel2.Margin = new System.Windows.Forms.Padding(0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1149, 1);
-            this.panel2.TabIndex = 14;
             // 
             // panelRight
             // 
@@ -220,75 +209,6 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "stay close to your customer";
             // 
-            // MinimizeButton
-            // 
-            this.MinimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MinimizeButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.MinimizeButton.DisplayText = "_";
-            this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinimizeButton.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold);
-            this.MinimizeButton.ForeColor = System.Drawing.Color.White;
-            this.MinimizeButton.Location = new System.Drawing.Point(838, 10);
-            this.MinimizeButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.MinimizeButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(25, 25);
-            this.MinimizeButton.TabIndex = 100;
-            this.MinimizeButton.Text = "_";
-            this.MinimizeButton.TextLocation_X = 2;
-            this.MinimizeButton.TextLocation_Y = -8;
-            this.toolTip1.SetToolTip(this.MinimizeButton, "Minimize");
-            this.MinimizeButton.UseVisualStyleBackColor = true;
-            this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
-            // 
-            // MaxButton
-            // 
-            this.MaxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.MaxButton.CFormState = login.MinMaxButton.CustomFormState.Normal;
-            this.MaxButton.DisplayText = "_";
-            this.MaxButton.FlatAppearance.BorderSize = 0;
-            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MaxButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold);
-            this.MaxButton.ForeColor = System.Drawing.Color.White;
-            this.MaxButton.Location = new System.Drawing.Point(865, 10);
-            this.MaxButton.Margin = new System.Windows.Forms.Padding(0);
-            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.MaxButton.Name = "MaxButton";
-            this.MaxButton.Size = new System.Drawing.Size(25, 25);
-            this.MaxButton.TabIndex = 100;
-            this.MaxButton.Text = "_";
-            this.MaxButton.TextLocation_X = 7;
-            this.MaxButton.TextLocation_Y = 10;
-            this.toolTip1.SetToolTip(this.MaxButton, "Maximize");
-            this.MaxButton.UseVisualStyleBackColor = true;
-            this.MaxButton.Click += new System.EventHandler(this.MaxButton_Click);
-            // 
-            // CloserButton
-            // 
-            this.CloserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloserButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.CloserButton.DisplayText = "X";
-            this.CloserButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.CloserButton.FlatAppearance.BorderSize = 2;
-            this.CloserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloserButton.Font = new System.Drawing.Font("Candara", 16F, System.Drawing.FontStyle.Bold);
-            this.CloserButton.ForeColor = System.Drawing.Color.White;
-            this.CloserButton.Location = new System.Drawing.Point(892, 11);
-            this.CloserButton.Margin = new System.Windows.Forms.Padding(0);
-            this.CloserButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.CloserButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.CloserButton.Name = "CloserButton";
-            this.CloserButton.Size = new System.Drawing.Size(25, 25);
-            this.CloserButton.TabIndex = 101;
-            this.CloserButton.Text = "X";
-            this.CloserButton.TextLocation_X = 3;
-            this.CloserButton.TextLocation_Y = 0;
-            this.toolTip1.SetToolTip(this.CloserButton, "Close");
-            this.CloserButton.UseVisualStyleBackColor = true;
-            this.CloserButton.Click += new System.EventHandler(this.CloserButton_Click);
-            // 
             // WindowTextLabel
             // 
             this.WindowTextLabel.AutoSize = true;
@@ -314,7 +234,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.Color.Gray;
-            this.panel4.Location = new System.Drawing.Point(356, 77);
+            this.panel4.Location = new System.Drawing.Point(356, 78);
             this.panel4.Margin = new System.Windows.Forms.Padding(0);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(1, 344);
@@ -802,12 +722,91 @@
             this.label2.TabIndex = 115;
             this.label2.Text = "Search in";
             // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.Gray;
+            this.panel2.Location = new System.Drawing.Point(1, 78);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1149, 1);
+            this.panel2.TabIndex = 116;
+            // 
+            // MinimizeButton
+            // 
+            this.MinimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MinimizeButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.MinimizeButton.DisplayText = "_";
+            this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeButton.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold);
+            this.MinimizeButton.ForeColor = System.Drawing.Color.White;
+            this.MinimizeButton.Location = new System.Drawing.Point(838, 10);
+            this.MinimizeButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.MinimizeButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.MinimizeButton.Name = "MinimizeButton";
+            this.MinimizeButton.Size = new System.Drawing.Size(25, 25);
+            this.MinimizeButton.TabIndex = 100;
+            this.MinimizeButton.Text = "_";
+            this.MinimizeButton.TextLocation_X = 2;
+            this.MinimizeButton.TextLocation_Y = -8;
+            this.toolTip1.SetToolTip(this.MinimizeButton, "Minimize");
+            this.MinimizeButton.UseVisualStyleBackColor = true;
+            this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
+            // 
+            // MaxButton
+            // 
+            this.MaxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.MaxButton.CFormState = login.MinMaxButton.CustomFormState.Normal;
+            this.MaxButton.DisplayText = "_";
+            this.MaxButton.FlatAppearance.BorderSize = 0;
+            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MaxButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold);
+            this.MaxButton.ForeColor = System.Drawing.Color.White;
+            this.MaxButton.Location = new System.Drawing.Point(865, 10);
+            this.MaxButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.MaxButton.Name = "MaxButton";
+            this.MaxButton.Size = new System.Drawing.Size(25, 25);
+            this.MaxButton.TabIndex = 100;
+            this.MaxButton.Text = "_";
+            this.MaxButton.TextLocation_X = 7;
+            this.MaxButton.TextLocation_Y = 10;
+            this.toolTip1.SetToolTip(this.MaxButton, "Maximize");
+            this.MaxButton.UseVisualStyleBackColor = true;
+            this.MaxButton.Click += new System.EventHandler(this.MaxButton_Click);
+            // 
+            // CloserButton
+            // 
+            this.CloserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloserButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.CloserButton.DisplayText = "X";
+            this.CloserButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.CloserButton.FlatAppearance.BorderSize = 2;
+            this.CloserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloserButton.Font = new System.Drawing.Font("Candara", 16F, System.Drawing.FontStyle.Bold);
+            this.CloserButton.ForeColor = System.Drawing.Color.White;
+            this.CloserButton.Location = new System.Drawing.Point(892, 11);
+            this.CloserButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CloserButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.CloserButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.CloserButton.Name = "CloserButton";
+            this.CloserButton.Size = new System.Drawing.Size(25, 25);
+            this.CloserButton.TabIndex = 101;
+            this.CloserButton.Text = "X";
+            this.CloserButton.TextLocation_X = 3;
+            this.CloserButton.TextLocation_Y = 0;
+            this.toolTip1.SetToolTip(this.CloserButton, "Close");
+            this.CloserButton.UseVisualStyleBackColor = true;
+            this.CloserButton.Click += new System.EventHandler(this.CloserButton_Click);
+            // 
             // MainApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1156, 769);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboSearch);
             this.Controls.Add(this.label1);
@@ -867,9 +866,7 @@
             this.Name = "MainApplication";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer Management - Main";
-            this.Load += new System.EventHandler(this.CM_Main_Load);
             this.Click += new System.EventHandler(this.MaxButton_Click);
-            this.panelLeft.ResumeLayout(false);
             this.panelLeftTop.ResumeLayout(false);
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
@@ -942,7 +939,6 @@
         private System.Windows.Forms.Label labelChangedTo;
         private System.Windows.Forms.Label labelPurpose;
         private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelFilterByEnvironment;
         private System.Windows.Forms.ComboBox comboEnvironment;
         private System.Windows.Forms.BindingSource tblChangeTrackingBindingSource1;
@@ -951,5 +947,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboSearch;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
     }
 }

@@ -37,12 +37,8 @@ namespace login
         Size _normalWindowSize;
         Point _normalWindowLocation = Point.Empty;
 
-
-
-        private void CM_Main_Load(object sender, EventArgs e)
-        {
-
-        }
+        /// initialize variable
+        int LastLoadedItem = 0;
 
         private void CloserButton_Click(object sender, EventArgs e)
         {
@@ -385,7 +381,6 @@ namespace login
 
             /// database connection and query
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-
             string sql = "SELECT [IcaoDesignator] FROM tbl_Airlines order by [IcaoDesignator] ASC";
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
             SqlDataReader myReader;
@@ -405,7 +400,7 @@ namespace login
                 /// should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
-            /// load the autocomplet data into combobox
+            /// load the autocomplete data into combobox
             comboIcao.AutoCompleteCustomSource = coll;
         }
         
@@ -413,9 +408,7 @@ namespace login
         private void comboIcao_SelectedIndexChanged(object sender, EventArgs e)
         {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-
             string sql = "SELECT * FROM tbl_Airlines WHERE [IcaoDesignator] = '" + comboIcao.Text + "';";
-
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
             SqlDataReader myReader;
             try
@@ -423,6 +416,7 @@ namespace login
                 sqlcon.Open();
                 myReader = cmd.ExecuteReader();
 
+                /// load data int Airline Information text boxes
                 while (myReader.Read())
                 {
                     string iata = myReader.GetString(1);
@@ -466,22 +460,11 @@ namespace login
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
                 /// fill the individual Textboxes with the latest change
-                /// ****************************************************
-                txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); /// Id
-                txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); /// Timestamp
-                txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); /// Department
-                txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); ///Environment
-                txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); /// Component
-                txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); /// ChangedFrom
-                txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); /// [ChangedTo]
-                txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); /// [CreatedBy]
-                txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  /// [Purpose]
-
+                DisplayRecentSelectResult();
             }
             else
             {
-                ///comboIcao.Text = "";
-                ///MessageBox.Show("Please select a customer from the ICAO dropdown first!");
+                /// do nothing
             }
 
             /// show refresh label
@@ -499,17 +482,11 @@ namespace login
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
                 /// fill the individual Textboxes with the latest change
-                /// ****************************************************
-                txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); /// Id
-                txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); /// Timestamp
-                txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); /// Department
-                txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); ///Environment
-                txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); /// Component
-                txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); /// ChangedFrom
-                txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); /// [ChangedTo]
-                txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); /// [CreatedBy]
-                txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  /// [Purpose]
+                DisplayRecentSelectResult();
 
+                /// load ID of change as integer into variable
+                ///LastLoadedItem = Convert.ToInt32(txtId.Text);
+                ///MessageBox.Show("your item is: " + LastLoadedItem);
             }
             else
             {
@@ -530,7 +507,7 @@ namespace login
         {
             /// change the dataGrid_RecentChanges table layout
             dataGrid_RecentChanges.Columns[0].Width = 30;
-            dataGrid_RecentChanges.Columns[0].Visible = false;  /// id
+            ///dataGrid_RecentChanges.Columns[0].Visible = false;  /// id
             dataGrid_RecentChanges.Columns[1].Width = 170;
             dataGrid_RecentChanges.Columns[1].DefaultCellStyle.Format = "dd-MM-yyyy hh:mm:ss"; /// Timestamp
             dataGrid_RecentChanges.Columns[2].Width = 150;      /// Department
@@ -544,6 +521,21 @@ namespace login
             dataGrid_RecentChanges.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       /// [Purpose]
         }
 
+        /// this function holds the assignment to the individual text boxes to display the selected record details
+        void DisplayRecentSelectResult()
+        {
+            /// fill the individual Textboxes
+            txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); /// Id
+            txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); /// Timestamp
+            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); /// Department
+            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); ///Environment
+            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); /// Component
+            txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); /// ChangedFrom
+            txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); /// [ChangedTo]
+            txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString();  /// [Purpose]
+            txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString(); /// [CreatedBy
+        }
+
         /// function to automatically load the data on selection of customer
         void LoadTable()
         {
@@ -551,14 +543,15 @@ namespace login
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
             /// the query
             string sql;
+            sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
 
             if (comboEnvironment.ToString().Equals(""))
             {
-                sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' ORDER BY [Id] DESC, [Timestamp] DESC;";
             }
             else
             {
-                sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
             }
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
 
@@ -581,18 +574,6 @@ namespace login
 
             /// change the dataGrid_RecentChanges table layout
             DisplayRecentChangesResults();
-
-            /// validation
-            if (dataGrid_RecentChanges.Rows.Count > 0)
-            {
-                /// do nothing at the moment
-            }
-            else
-            {
-                ///comboIcao.Text = "";
-                ///comboEnvironment.Text = "";
-                ///MessageBox.Show("Please select a customer from the ICAO dropdown first!");
-            }
         }
 
         private void timerRefreshRecentChanges_Tick(object sender, EventArgs e)
@@ -640,15 +621,11 @@ namespace login
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
                 /// fill the individual Textboxes
-                txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); /// Id
-                txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); /// Timestamp
-                txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); /// Department
-                txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); ///Environment
-                txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); /// Component
-                txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); /// ChangedFrom
-                txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); /// [ChangedTo]
-                txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString();  /// [Purpose]
-                txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString(); /// [CreatedBy]
+                DisplayRecentSelectResult();
+
+                /// load ID of change as integer into variable
+                LastLoadedItem = Convert.ToInt32(txtId.Text);
+                MessageBox.Show("your item is: " + LastLoadedItem);
             }
             else
             {
@@ -662,17 +639,18 @@ namespace login
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
             string sql;
+            sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
 
             if (comboSearch.Text == "Component")
             {
                 /// the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Component] like '%"+ txtSearch .Text+ "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Component] like '%"+ txtSearch .Text+ "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Component] like '%" + txtSearch.Text + "%'ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Component] like '%" + txtSearch.Text + "%'ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -697,11 +675,11 @@ namespace login
                 /// the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%'AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%'AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -727,11 +705,11 @@ namespace login
                 /// the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -757,11 +735,11 @@ namespace login
                 /// the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -805,6 +783,7 @@ namespace login
         {
             txtSearch.Text = "";
         }
+
     }
 }
 
