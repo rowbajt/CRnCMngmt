@@ -1,0 +1,50 @@
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\bin\Debug\login.exe.config
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\bin\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\bin\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\login.MainApplication.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\login.LOGIN.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\login_withComboboxAutocomplete\login\obj\Debug\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\bin\Debug\login.exe.config
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\bin\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\bin\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\login.MainApplication.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\login.LOGIN.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\03login_withRecentIssues\login\obj\Debug\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\bin\Debug\login.exe.config
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\bin\Debug\login.exe
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\bin\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\login.MainApplication.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\login.LOGIN.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Documents\Visual Studio 2015\Projects\04login_withRecentIssuesToDetail\login\obj\Debug\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\bin\Debug\login.exe.config
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\login.exe
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\login.pdb
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\bin\Debug\login.exe
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\bin\Debug\login.pdb
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\login.MainApplication.resources
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\login.LOGIN.resources
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Source\GitHub Repos\CRnCMgmt_Github\login\obj\Debug\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Debug\login.exe.config
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\login.exe
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\login.pdb
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\login.MainApplication.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\login.LOGIN.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Debug\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Debug\login.exe
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Debug\login.pdb
