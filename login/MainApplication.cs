@@ -17,13 +17,13 @@ namespace login
         {
             InitializeComponent();
 
-            /// function loads data into the Icao dropdown
+            // function loads data into the Icao dropdown
             FillIcaoComboBox();
-            /// funcction loads data into the Environment dropdown
+            // funcction loads data into the Environment dropdown
             FillEnvironmentComboBox();
-            /// function Autocomplete for Icao dropdown
+            // function Autocomplete for Icao dropdown
             AutoCompleteText();
-            /// function Load data into Recent Changes grid
+            // function Load data into Recent Changes grid
             LoadTable();
         }
 
@@ -37,7 +37,7 @@ namespace login
         Size _normalWindowSize;
         Point _normalWindowLocation = Point.Empty;
 
-        /// initialize variable
+        // initialize variable
         int LastLoadedItem = 0;
 
         private void CloserButton_Click(object sender, EventArgs e)
@@ -46,7 +46,7 @@ namespace login
             Application.Exit();
         }
 
-        /// Top Border Panel
+        // Top Border Panel
         private void TopBorderPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -81,7 +81,7 @@ namespace login
         {
             isTopBorderPanelDragged = false;
         }
-        /// Top Panel
+        // Top Panel
         private void TopPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -143,7 +143,7 @@ namespace login
                 }
             }
         }
-        /// Bottom Panel
+        // Bottom Panel
         private void BottomPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -175,7 +175,7 @@ namespace login
         {
             isBottomPanelDragged = false;
         }
-        /// Left Panel
+        // Left Panel
         private void LeftPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (this.Location.X <= 0 || e.X < 0)
@@ -218,7 +218,7 @@ namespace login
         {
             isLeftPanelDragged = false;
         }
-        /// Right Panel
+        // Right Panel
         private void RightPanel_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -250,12 +250,12 @@ namespace login
             isRightPanelDragged = false;
         }
 
-        /// Minimize Button
+        // Minimize Button
         private void MinimizeButton_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
         }
-        /// Maximize Button
+        // Maximize Button
         private void MaxButton_Click(object sender, EventArgs e)
         {
             if (isWindowMaximized)
@@ -279,14 +279,14 @@ namespace login
                 isWindowMaximized = true;
             }
         }
-        /// logout current user from MainApplication and show Login Window
+        // logout current user from MainApplication and show Login Window
         private void panelLogout_Click(object sender, EventArgs e)
         {
             LOGIN objloginWithDatabases = new LOGIN();
             this.Hide();
             objloginWithDatabases.Show();
         }
-        /// Code to move windows when clicking on WindowTextLabel
+        // Code to move windows when clicking on WindowTextLabel
         private void WindowTextLabel_MouseDown(object sender, MouseEventArgs e)
         {
             TopPanel_MouseDown(sender, e);
@@ -300,7 +300,7 @@ namespace login
             TopPanel_MouseUp(sender, e);
         }
 
-        /// This code fills the combobox which holds the [IcaoDesignator] data from the table tbl_Airlines
+        // This code fills the combobox which holds the [IcaoDesignator] data from the table tbl_Airlines
         public void FillIcaoComboBox()
         {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
@@ -314,36 +314,38 @@ namespace login
 
                 while (myReader.Read())
                 {
-                    string sName = myReader.GetString(2); /// index 2 represents 3rd column in table - [IcaoDesignator]
+                    string sName = myReader.GetString(2); // index 2 represents 3rd column in table - [IcaoDesignator]
                     comboIcao.Items.Add(sName);
                 }
             }
             catch (Exception exptn)
             {
-                /// should maybe replaced by hidden Text field!!!! 
+                // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
 
             sqlcon.Close();
         }
 
-        /// This code fills the [Environment] combobox
+        // This code fills the [Environment] combobox
         public void FillEnvironmentComboBox()
         {
-            /// clear all data from combobox
+            // clear all data from combobox
             comboEnvironment.Items.Clear();
 
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
             string sql;
+
             if (comboIcao.SelectedItem != null)
             {
                 sql = "SELECT distinct([Environment]) FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' order by [Environment] ASC";
             }
-            else {
+            else
+            {
                 sql = "SELECT distinct([Environment]) FROM tbl_ChangeTracking order by [Environment] ASC";
             }
-            
+
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
             SqlDataReader myReader;
             try
@@ -351,10 +353,10 @@ namespace login
                 sqlcon.Open();
                 myReader = cmd.ExecuteReader();
 
-                /// add initial empty record
+                // add initial empty record
                 comboEnvironment.Items.Add("");
-                
-                /// add the records from the database result
+
+                // add the records from the database result
                 while (myReader.Read())
                 {
                     string sName = myReader.GetString(0);
@@ -363,23 +365,23 @@ namespace login
             }
             catch (Exception exptn)
             {
-                /// should maybe replaced by hidden Text field!!!! 
+                // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
 
             sqlcon.Close();
         }
 
-        /// function for autocomplete IcaoDesignator Dropbdown
+        // function for autocomplete IcaoDesignator Dropbdown
         void AutoCompleteText()
         {
             comboIcao.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboIcao.AutoCompleteSource = AutoCompleteSource.CustomSource;
 
-            /// coll is the variable defined to hold the collection - this should be the data from the database table
+            // coll is the variable defined to hold the collection - this should be the data from the database table
             AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
 
-            /// database connection and query
+            // database connection and query
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
             string sql = "SELECT [IcaoDesignator] FROM tbl_Airlines order by [IcaoDesignator] ASC";
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
@@ -397,18 +399,20 @@ namespace login
             }
             catch (Exception exptn)
             {
-                /// should maybe replaced by hidden Text field!!!! 
+                // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
-            /// load the autocomplete data into combobox
+            // load the autocomplete data into combobox
             comboIcao.AutoCompleteCustomSource = coll;
         }
-        
-        /// This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
+
+        // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
         private void comboIcao_SelectedIndexChanged(object sender, EventArgs e)
         {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+
             string sql = "SELECT * FROM tbl_Airlines WHERE [IcaoDesignator] = '" + comboIcao.Text + "';";
+
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
             SqlDataReader myReader;
             try
@@ -416,7 +420,7 @@ namespace login
                 sqlcon.Open();
                 myReader = cmd.ExecuteReader();
 
-                /// load data int Airline Information text boxes
+                // load data int Airline Information text boxes
                 while (myReader.Read())
                 {
                     string iata = myReader.GetString(1);
@@ -437,121 +441,137 @@ namespace login
                     txtAirlineDetails.Text = airlineDetails;
                 }
             }
-            catch (Exception exptn) {
-                /// should maybe replaced by hidden Text field!!!! 
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
 
-            /// clear comboEnvironment dropdown to display all changes
+            // clear comboEnvironment dropdown to display all changes
             comboEnvironment.Text = "";
 
-            /// clear the txtSearch textbox
+            // clear the txtSearch textbox
             txtSearch.Text = "";
 
-            /// clear the comboSearch textbox
+            // clear the comboSearch textbox
             comboSearch.Text = "";
 
-            /// Load data to Recent Changes datagrid
+            // Load data to Recent Changes datagrid
             LoadTable();
 
-            /// load the Environment dropdown
+            // load the Environment dropdown
             FillEnvironmentComboBox();
 
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
-                /// fill the individual Textboxes with the latest change
+                // fill the individual Textboxes with the latest change
                 DisplayRecentSelectResult();
             }
             else
             {
-                /// do nothing
+                // do nothing
             }
 
-            /// show refresh label
+            // show refresh label
             labelRefreshIndicator.Visible = true;
 
-            /// enable timer
+            // enable timer
             timerNotification.Enabled = true;
         }
 
         private void comboEnvironment_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /// Load data to Recent Changes datagrid
+            // Load data to Recent Changes datagrid
             LoadTable();
 
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
-                /// fill the individual Textboxes with the latest change
+                // fill the individual Textboxes with the latest change
                 DisplayRecentSelectResult();
 
-                /// load ID of change as integer into variable
-                ///LastLoadedItem = Convert.ToInt32(txtId.Text);
-                ///MessageBox.Show("your item is: " + LastLoadedItem);
+                // load ID of change as integer into variable
+                //LastLoadedItem = Convert.ToInt32(txtId.Text);
+                //MessageBox.Show("your item is: " + LastLoadedItem);
             }
             else
             {
-                ///comboIcao.Text = "";
-                ///comboEnvironment.Text = "";
-                ///MessageBox.Show("Please select a customer from the ICAO dropdown first!");
+                //comboIcao.Text = "";
+                //comboEnvironment.Text = "";
+                //MessageBox.Show("Please select a customer from the ICAO dropdown first!");
             }
 
-            /// show refresh label
+            // show refresh label
             labelRefreshIndicator.Visible = true;
 
-            /// enable timer
+            // enable timer
             timerNotification.Enabled = true;
         }
 
-        /// the recentChanges table results layout
+        // the recentChanges table results layout
         void DisplayRecentChangesResults()
         {
-            /// change the dataGrid_RecentChanges table layout
+            // change the dataGrid_RecentChanges table layout
             dataGrid_RecentChanges.Columns[0].Width = 30;
-            ///dataGrid_RecentChanges.Columns[0].Visible = false;  /// id
+            //dataGrid_RecentChanges.Columns[0].Visible = false;  // id
             dataGrid_RecentChanges.Columns[1].Width = 170;
-            dataGrid_RecentChanges.Columns[1].DefaultCellStyle.Format = "dd-MM-yyyy hh:mm:ss"; /// Timestamp
-            dataGrid_RecentChanges.Columns[2].Width = 150;      /// Department
-            dataGrid_RecentChanges.Columns[3].Width = 100;      ///Environment
-            dataGrid_RecentChanges.Columns[4].Width = 220;      /// Component
+            dataGrid_RecentChanges.Columns[1].DefaultCellStyle.Format = "dd-MM-yyyy hh:mm:ss"; // Timestamp
+            dataGrid_RecentChanges.Columns[2].Width = 150;      // Department
+            dataGrid_RecentChanges.Columns[3].Width = 100;      //Environment
+            dataGrid_RecentChanges.Columns[4].Width = 220;      // Component
             dataGrid_RecentChanges.Columns[5].Width = 230;
-            dataGrid_RecentChanges.Columns[5].Visible = false;  /// ChangedFrom
+            dataGrid_RecentChanges.Columns[5].Visible = false;  // ChangedFrom
             dataGrid_RecentChanges.Columns[6].Width = 230;
-            dataGrid_RecentChanges.Columns[6].Visible = false;  /// [ChangedTo]
-            dataGrid_RecentChanges.Columns[7].Width = 150;      /// [CreatedBy]
-            dataGrid_RecentChanges.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       /// [Purpose]
+            dataGrid_RecentChanges.Columns[6].Visible = false;  // [ChangedTo]
+            dataGrid_RecentChanges.Columns[7].Width = 150;      // [CreatedBy]
+            dataGrid_RecentChanges.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       // [Purpose]
         }
 
-        /// this function holds the assignment to the individual text boxes to display the selected record details
+        // this function holds the assignment to the individual text boxes to display the selected record details
         void DisplayRecentSelectResult()
         {
-            /// fill the individual Textboxes
-            txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); /// Id
-            txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); /// Timestamp
-            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); /// Department
-            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); ///Environment
-            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); /// Component
-            txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); /// ChangedFrom
-            txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); /// [ChangedTo]
-            txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString();  /// [Purpose]
-            txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString(); /// [CreatedBy
+            // fill the individual Textboxes
+            txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); // Id
+            txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); // Timestamp
+            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); // Department
+            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); //Environment
+            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); // Component
+            txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); // ChangedFrom
+            txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); // [ChangedTo]
+            txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  // [Purpose]
+            rtfPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  // [Purpose RTF]
+            txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); // [CreatedBy]
         }
 
-        /// function to automatically load the data on selection of customer
+        // function to automatically load the data on selection of customer
         void LoadTable()
         {
-            /// This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
+            // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-            /// the query
+            // the query
             string sql;
+
             sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
 
             if (comboEnvironment.ToString().Equals(""))
             {
-                sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                sql = sql + " WHERE [AirlineId] like '%" + comboIcao.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
             }
             else
             {
                 sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+            }
+
+            if (comboIcao.SelectedItem == null)
+            {
+                sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose]  FROM tbl_ChangeTracking order by [Id] DESC";
+                // empty all Airline Information text boxes
+                txtIata.Text = "";
+                txt3Digit.Text = "";
+                txtAirlineName.Text = "";
+                txtHub1.Text = "";
+                txtHub2.Text = "";
+                txtCountry.Text = "";
+                txtAirlineDetails.Text = "";
             }
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
 
@@ -567,75 +587,78 @@ namespace login
                 dataGrid_RecentChanges.DataSource = bSource;
                 sda.Update(dbdataset);
 
-            }catch (Exception exptn) {
-                /// should maybe replaced by hidden Text field!!!! 
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
             }
 
-            /// change the dataGrid_RecentChanges table layout
+            // change the dataGrid_RecentChanges table layout
             DisplayRecentChangesResults();
         }
 
         private void timerRefreshRecentChanges_Tick(object sender, EventArgs e)
         {
-            /// only refresh if ther is no text in the search box
-            if (String.IsNullOrEmpty(txtSearch.Text) || String.IsNullOrEmpty(comboSearch.Text) || (comboSearch.SelectedIndex == -1) )
+            // only refresh if ther is no text in the search box
+            if (String.IsNullOrEmpty(txtSearch.Text) || String.IsNullOrEmpty(comboSearch.Text) || (comboSearch.SelectedIndex == -1))
             {
-                /// Load data to Recent Changes datagrid
+                // Load data to Recent Changes datagrid
                 LoadTable();
 
-                /// change the message
+                // change the message
                 labelRefreshIndicator.ForeColor = Color.FromArgb(25, 152, 97);
                 labelRefreshIndicator.Text = "data refresh";
 
-                /// show refresh label
+                // show refresh label
                 labelRefreshIndicator.Visible = true;
 
-                /// enable timer
+                // enable timer
                 timerNotification.Enabled = true;
             }
-            else {
+            else
+            {
 
-                /// show refresh label
+                // show refresh label
                 labelRefreshIndicator.Visible = true;
-                /// change the message and keep it on the screen
+                // change the message and keep it on the screen
                 labelRefreshIndicator.ForeColor = Color.Red;
                 labelRefreshIndicator.Text = "refresh suspended - clear 'text search' field to resume refresh";
             }
-                        
+
         }
 
         private void timerNotification_Tick(object sender, EventArgs e)
         {
-            /// show refresh label
+            // show refresh label
             labelRefreshIndicator.Visible = false;
 
-            /// disable timer
+            // disable timer
             timerNotification.Enabled = false;
 
         }
 
         private void dataGrid_RecentChanges_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            /// validation
+            // validation
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
-                /// fill the individual Textboxes
+                // fill the individual Textboxes
                 DisplayRecentSelectResult();
 
-                /// load ID of change as integer into variable
+                // load ID of change as integer into variable
                 LastLoadedItem = Convert.ToInt32(txtId.Text);
-                MessageBox.Show("your item is: " + LastLoadedItem);
+                //MessageBox.Show("your item is: " + LastLoadedItem);
             }
             else
             {
                 MessageBox.Show("Please select a customer from the ICAO dropdown first!");
-            }            
+            }
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            /// This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
+            // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
             string sql;
@@ -643,10 +666,10 @@ namespace login
 
             if (comboSearch.Text == "Component")
             {
-                /// the query
+                // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Component] like '%"+ txtSearch .Text+ "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Component] like '%" + txtSearch.Text + "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
@@ -667,12 +690,13 @@ namespace login
                 }
                 catch (Exception exptn)
                 {
-                    /// should maybe replaced by hidden Text field!!!! 
+                    // should maybe replaced by hidden Text field!!!! 
                     MessageBox.Show(exptn.Message);
                 }
-            } else if (comboSearch.Text == "Created By")
+            }
+            else if (comboSearch.Text == "Created By")
             {
-                /// the query
+                // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
                     sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
@@ -696,13 +720,13 @@ namespace login
                 }
                 catch (Exception exptn)
                 {
-                    /// should maybe replaced by hidden Text field!!!! 
+                    // should maybe replaced by hidden Text field!!!! 
                     MessageBox.Show(exptn.Message);
                 }
             }
             else if (comboSearch.Text == "Department")
             {
-                /// the query
+                // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
                     sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
@@ -726,13 +750,13 @@ namespace login
                 }
                 catch (Exception exptn)
                 {
-                    /// should maybe replaced by hidden Text field!!!! 
+                    // should maybe replaced by hidden Text field!!!! 
                     MessageBox.Show(exptn.Message);
                 }
             }
             else if (comboSearch.Text == "Purpose")
             {
-                /// the query
+                // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
                     sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
@@ -756,34 +780,50 @@ namespace login
                 }
                 catch (Exception exptn)
                 {
-                    /// should maybe replaced by hidden Text field!!!! 
+                    // should maybe replaced by hidden Text field!!!! 
                     MessageBox.Show(exptn.Message);
                 }
             }
 
 
-            /// change the dataGrid_RecentChanges table layout
+            // change the dataGrid_RecentChanges table layout
             DisplayRecentChangesResults();
 
-            /// validation
+            // validation
             if (dataGrid_RecentChanges.Rows.Count > 0)
             {
-                /// do nothing at the moment
+                // do nothing at the moment
             }
             else
             {
-                ///comboIcao.Text = "";
-                ///comboEnvironment.Text = "";
-                ///MessageBox.Show("Please select a customer from the ICAO dropdown first!");
+                //comboIcao.Text = "";
+                //comboEnvironment.Text = "";
+                //MessageBox.Show("Please select a customer from the ICAO dropdown first!");
             }
-
         }
-
         private void comboSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtSearch.Text = "";
         }
-
+        private void buttonInsert_Click(object sender, EventArgs e)
+        {
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "INSERT INTO tbl_ChangeTracking ([AirlineId],[Timestamp],[Department],[Environment],[Component],[ChangedFrom],[ChangedTo],[Purpose],[CreatedBy]) SELECT '" + comboIcao.Text + "',getUTCdate(), '" + txtDepartement.Text + "','" + txtEnvironment.Text + "', '" + txtComponent.Text + "', '" + txtChangedFrom.Text + "', '" + txtChangedTo.Text + "', '" + txtPurpose.Text + "', '" + txtAuthor.Text + "'; ";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            try
+            {
+                sqlcon.Open();
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("New record inserted!");
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+                // show new records
+                LoadTable();
+            }
+        }
     }
 }
 

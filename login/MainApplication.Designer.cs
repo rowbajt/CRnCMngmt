@@ -98,6 +98,11 @@
             this.comboSearch = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.rtfPurpose = new System.Windows.Forms.RichTextBox();
+            this.labelRTF = new System.Windows.Forms.Label();
+            this.buttonInsert = new System.Windows.Forms.Button();
+            this.buttonUpdate = new System.Windows.Forms.Button();
+            this.buttonDelete = new System.Windows.Forms.Button();
             this.MinimizeButton = new login.ButtonZ();
             this.MaxButton = new login.MinMaxButton();
             this.CloserButton = new login.ButtonZ();
@@ -181,7 +186,7 @@
             // 
             // panelTop
             // 
-            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelTop.Controls.Add(this.label4);
@@ -406,8 +411,8 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dataGrid_RecentChanges.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGrid_RecentChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGrid_RecentChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGrid_RecentChanges.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dataGrid_RecentChanges.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -491,6 +496,7 @@
             // 
             // txtId
             // 
+            this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(368, 106);
             this.txtId.Name = "txtId";
             this.txtId.Size = new System.Drawing.Size(72, 24);
@@ -530,7 +536,7 @@
             this.txtChangedFrom.Multiline = true;
             this.txtChangedFrom.Name = "txtChangedFrom";
             this.txtChangedFrom.Size = new System.Drawing.Size(368, 69);
-            this.txtChangedFrom.TabIndex = 105;
+            this.txtChangedFrom.TabIndex = 106;
             // 
             // txtChangedTo
             // 
@@ -538,22 +544,22 @@
             this.txtChangedTo.Multiline = true;
             this.txtChangedTo.Name = "txtChangedTo";
             this.txtChangedTo.Size = new System.Drawing.Size(368, 69);
-            this.txtChangedTo.TabIndex = 106;
+            this.txtChangedTo.TabIndex = 107;
             // 
             // txtPurpose
             // 
             this.txtPurpose.Location = new System.Drawing.Point(368, 289);
             this.txtPurpose.Multiline = true;
             this.txtPurpose.Name = "txtPurpose";
-            this.txtPurpose.Size = new System.Drawing.Size(766, 135);
-            this.txtPurpose.TabIndex = 107;
+            this.txtPurpose.Size = new System.Drawing.Size(368, 135);
+            this.txtPurpose.TabIndex = 108;
             // 
             // txtAuthor
             // 
             this.txtAuthor.Location = new System.Drawing.Point(766, 152);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(368, 24);
-            this.txtAuthor.TabIndex = 108;
+            this.txtAuthor.TabIndex = 105;
             // 
             // labelId
             // 
@@ -731,6 +737,73 @@
             this.panel2.Size = new System.Drawing.Size(1149, 1);
             this.panel2.TabIndex = 116;
             // 
+            // rtfPurpose
+            // 
+            this.rtfPurpose.Location = new System.Drawing.Point(767, 289);
+            this.rtfPurpose.Name = "rtfPurpose";
+            this.rtfPurpose.Size = new System.Drawing.Size(367, 135);
+            this.rtfPurpose.TabIndex = 117;
+            this.rtfPurpose.Text = "";
+            // 
+            // labelRTF
+            // 
+            this.labelRTF.AutoSize = true;
+            this.labelRTF.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRTF.Location = new System.Drawing.Point(764, 273);
+            this.labelRTF.Name = "labelRTF";
+            this.labelRTF.Size = new System.Drawing.Size(133, 15);
+            this.labelRTF.TabIndex = 118;
+            this.labelRTF.Text = "Purpose RTF Format";
+            // 
+            // buttonInsert
+            // 
+            this.buttonInsert.BackColor = System.Drawing.SystemColors.Window;
+            this.buttonInsert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonInsert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonInsert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.buttonInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInsert.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonInsert.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.buttonInsert.Location = new System.Drawing.Point(555, 449);
+            this.buttonInsert.Name = "buttonInsert";
+            this.buttonInsert.Size = new System.Drawing.Size(110, 26);
+            this.buttonInsert.TabIndex = 109;
+            this.buttonInsert.Text = "Insert New";
+            this.buttonInsert.UseVisualStyleBackColor = false;
+            this.buttonInsert.Click += new System.EventHandler(this.buttonInsert_Click);
+            // 
+            // buttonUpdate
+            // 
+            this.buttonUpdate.BackColor = System.Drawing.SystemColors.Window;
+            this.buttonUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.buttonUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonUpdate.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUpdate.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.buttonUpdate.Location = new System.Drawing.Point(671, 449);
+            this.buttonUpdate.Name = "buttonUpdate";
+            this.buttonUpdate.Size = new System.Drawing.Size(110, 26);
+            this.buttonUpdate.TabIndex = 110;
+            this.buttonUpdate.Text = "Update";
+            this.buttonUpdate.UseVisualStyleBackColor = false;
+            // 
+            // buttonDelete
+            // 
+            this.buttonDelete.BackColor = System.Drawing.SystemColors.Window;
+            this.buttonDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDelete.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDelete.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.buttonDelete.Location = new System.Drawing.Point(787, 449);
+            this.buttonDelete.Name = "buttonDelete";
+            this.buttonDelete.Size = new System.Drawing.Size(110, 26);
+            this.buttonDelete.TabIndex = 111;
+            this.buttonDelete.Text = "Delete";
+            this.buttonDelete.UseVisualStyleBackColor = false;
+            // 
             // MinimizeButton
             // 
             this.MinimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -806,6 +879,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1156, 769);
+            this.Controls.Add(this.buttonDelete);
+            this.Controls.Add(this.buttonUpdate);
+            this.Controls.Add(this.buttonInsert);
+            this.Controls.Add(this.rtfPurpose);
+            this.Controls.Add(this.labelRTF);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboSearch);
@@ -948,5 +1026,10 @@
         private System.Windows.Forms.ComboBox comboSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.RichTextBox rtfPurpose;
+        private System.Windows.Forms.Label labelRTF;
+        private System.Windows.Forms.Button buttonInsert;
+        private System.Windows.Forms.Button buttonUpdate;
+        private System.Windows.Forms.Button buttonDelete;
     }
 }
