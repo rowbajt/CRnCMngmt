@@ -98,11 +98,11 @@
             this.comboSearch = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.rtfPurpose = new System.Windows.Forms.RichTextBox();
-            this.labelRTF = new System.Windows.Forms.Label();
             this.buttonInsert = new System.Windows.Forms.Button();
             this.buttonUpdate = new System.Windows.Forms.Button();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.txtIcao = new System.Windows.Forms.TextBox();
+            this.labelTxtIcao = new System.Windows.Forms.Label();
             this.MinimizeButton = new login.ButtonZ();
             this.MaxButton = new login.MinMaxButton();
             this.CloserButton = new login.ButtonZ();
@@ -186,7 +186,7 @@
             // 
             // panelTop
             // 
-            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.panelTop.Controls.Add(this.label4);
@@ -411,8 +411,8 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             this.dataGrid_RecentChanges.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGrid_RecentChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.dataGrid_RecentChanges.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGrid_RecentChanges.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.dataGrid_RecentChanges.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -496,6 +496,8 @@
             // 
             // txtId
             // 
+            this.txtId.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtId.Enabled = false;
             this.txtId.Location = new System.Drawing.Point(368, 106);
             this.txtId.Name = "txtId";
@@ -504,6 +506,9 @@
             // 
             // txtTimestamp
             // 
+            this.txtTimestamp.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtTimestamp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtTimestamp.Enabled = false;
             this.txtTimestamp.Location = new System.Drawing.Point(515, 106);
             this.txtTimestamp.Name = "txtTimestamp";
             this.txtTimestamp.Size = new System.Drawing.Size(221, 24);
@@ -511,55 +516,90 @@
             // 
             // txtDepartement
             // 
+            this.txtDepartement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtDepartement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtDepartement.Enabled = false;
             this.txtDepartement.Location = new System.Drawing.Point(766, 106);
             this.txtDepartement.Name = "txtDepartement";
             this.txtDepartement.Size = new System.Drawing.Size(368, 24);
             this.txtDepartement.TabIndex = 102;
+            this.txtDepartement.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtDepartement.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtEnvironment
             // 
+            this.txtEnvironment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtEnvironment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtEnvironment.Enabled = false;
             this.txtEnvironment.Location = new System.Drawing.Point(368, 152);
             this.txtEnvironment.Name = "txtEnvironment";
             this.txtEnvironment.Size = new System.Drawing.Size(142, 24);
             this.txtEnvironment.TabIndex = 103;
+            this.txtEnvironment.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtEnvironment.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtComponent
             // 
+            this.txtComponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtComponent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtComponent.Enabled = false;
             this.txtComponent.Location = new System.Drawing.Point(515, 152);
             this.txtComponent.Name = "txtComponent";
             this.txtComponent.Size = new System.Drawing.Size(221, 24);
             this.txtComponent.TabIndex = 104;
+            this.txtComponent.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtComponent.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtChangedFrom
             // 
+            this.txtChangedFrom.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtChangedFrom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtChangedFrom.Enabled = false;
             this.txtChangedFrom.Location = new System.Drawing.Point(368, 198);
             this.txtChangedFrom.Multiline = true;
             this.txtChangedFrom.Name = "txtChangedFrom";
             this.txtChangedFrom.Size = new System.Drawing.Size(368, 69);
             this.txtChangedFrom.TabIndex = 106;
+            this.txtChangedFrom.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtChangedFrom.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtChangedTo
             // 
+            this.txtChangedTo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtChangedTo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtChangedTo.Enabled = false;
             this.txtChangedTo.Location = new System.Drawing.Point(766, 198);
             this.txtChangedTo.Multiline = true;
             this.txtChangedTo.Name = "txtChangedTo";
             this.txtChangedTo.Size = new System.Drawing.Size(368, 69);
             this.txtChangedTo.TabIndex = 107;
+            this.txtChangedTo.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtChangedTo.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtPurpose
             // 
+            this.txtPurpose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtPurpose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtPurpose.Enabled = false;
             this.txtPurpose.Location = new System.Drawing.Point(368, 289);
             this.txtPurpose.Multiline = true;
             this.txtPurpose.Name = "txtPurpose";
-            this.txtPurpose.Size = new System.Drawing.Size(368, 135);
+            this.txtPurpose.Size = new System.Drawing.Size(766, 135);
             this.txtPurpose.TabIndex = 108;
+            this.txtPurpose.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtPurpose.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtAuthor
             // 
+            this.txtAuthor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtAuthor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAuthor.Enabled = false;
             this.txtAuthor.Location = new System.Drawing.Point(766, 152);
             this.txtAuthor.Name = "txtAuthor";
             this.txtAuthor.Size = new System.Drawing.Size(368, 24);
             this.txtAuthor.TabIndex = 105;
+            this.txtAuthor.Enter += new System.EventHandler(this.TextboxEdit_Enter);
+            this.txtAuthor.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // labelId
             // 
@@ -737,24 +777,6 @@
             this.panel2.Size = new System.Drawing.Size(1149, 1);
             this.panel2.TabIndex = 116;
             // 
-            // rtfPurpose
-            // 
-            this.rtfPurpose.Location = new System.Drawing.Point(767, 289);
-            this.rtfPurpose.Name = "rtfPurpose";
-            this.rtfPurpose.Size = new System.Drawing.Size(367, 135);
-            this.rtfPurpose.TabIndex = 117;
-            this.rtfPurpose.Text = "";
-            // 
-            // labelRTF
-            // 
-            this.labelRTF.AutoSize = true;
-            this.labelRTF.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRTF.Location = new System.Drawing.Point(764, 273);
-            this.labelRTF.Name = "labelRTF";
-            this.labelRTF.Size = new System.Drawing.Size(133, 15);
-            this.labelRTF.TabIndex = 118;
-            this.labelRTF.Text = "Purpose RTF Format";
-            // 
             // buttonInsert
             // 
             this.buttonInsert.BackColor = System.Drawing.SystemColors.Window;
@@ -787,6 +809,7 @@
             this.buttonUpdate.TabIndex = 110;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = false;
+            this.buttonUpdate.Click += new System.EventHandler(this.buttonUpdate_Click);
             // 
             // buttonDelete
             // 
@@ -803,6 +826,27 @@
             this.buttonDelete.TabIndex = 111;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = false;
+            this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // txtIcao
+            // 
+            this.txtIcao.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.txtIcao.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtIcao.Enabled = false;
+            this.txtIcao.Location = new System.Drawing.Point(446, 106);
+            this.txtIcao.Name = "txtIcao";
+            this.txtIcao.Size = new System.Drawing.Size(63, 24);
+            this.txtIcao.TabIndex = 117;
+            // 
+            // labelTxtIcao
+            // 
+            this.labelTxtIcao.AutoSize = true;
+            this.labelTxtIcao.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTxtIcao.Location = new System.Drawing.Point(443, 89);
+            this.labelTxtIcao.Name = "labelTxtIcao";
+            this.labelTxtIcao.Size = new System.Drawing.Size(35, 15);
+            this.labelTxtIcao.TabIndex = 118;
+            this.labelTxtIcao.Text = "Icao";
             // 
             // MinimizeButton
             // 
@@ -879,11 +923,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1156, 769);
+            this.Controls.Add(this.labelTxtIcao);
+            this.Controls.Add(this.txtIcao);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.buttonUpdate);
             this.Controls.Add(this.buttonInsert);
-            this.Controls.Add(this.rtfPurpose);
-            this.Controls.Add(this.labelRTF);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboSearch);
@@ -1026,10 +1070,10 @@
         private System.Windows.Forms.ComboBox comboSearch;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.RichTextBox rtfPurpose;
-        private System.Windows.Forms.Label labelRTF;
         private System.Windows.Forms.Button buttonInsert;
         private System.Windows.Forms.Button buttonUpdate;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.TextBox txtIcao;
+        private System.Windows.Forms.Label labelTxtIcao;
     }
 }

@@ -25,6 +25,10 @@ namespace login
             AutoCompleteText();
             // function Load data into Recent Changes grid
             LoadTable();
+            // function show/hide edit buttons
+            InsertEditUpdateMode();
+
+            
         }
 
         bool isTopPanelDragged = false;
@@ -39,6 +43,11 @@ namespace login
 
         // initialize variable
         int LastLoadedItem = 0;
+
+        // initialize the Insert New button state
+        int buttonInsertState = 0;
+        // initialize the Update button state
+        int buttonUpdateState = 0;
 
         private void CloserButton_Click(object sender, EventArgs e)
         {
@@ -339,7 +348,7 @@ namespace login
 
             if (comboIcao.SelectedItem != null)
             {
-                sql = "SELECT distinct([Environment]) FROM tbl_ChangeTracking WHERE [AirlineId] = '" + comboIcao.Text + "' order by [Environment] ASC";
+                sql = "SELECT distinct([Environment]) FROM tbl_ChangeTracking WHERE [IcaoDesignator] = '" + comboIcao.Text + "' order by [Environment] ASC";
             }
             else
             {
@@ -451,7 +460,7 @@ namespace login
             comboEnvironment.Text = "";
 
             // clear the txtSearch textbox
-            txtSearch.Text = "";
+            txtSearch.Clear();
 
             // clear the comboSearch textbox
             comboSearch.Text = "";
@@ -495,8 +504,8 @@ namespace login
             }
             else
             {
-                //comboIcao.Text = "";
-                //comboEnvironment.Text = "";
+                //comboIcao.Clear();;
+                //comboEnvironment.Clear();;
                 //MessageBox.Show("Please select a customer from the ICAO dropdown first!");
             }
 
@@ -512,18 +521,18 @@ namespace login
         {
             // change the dataGrid_RecentChanges table layout
             dataGrid_RecentChanges.Columns[0].Width = 30;
-            //dataGrid_RecentChanges.Columns[0].Visible = false;  // id
-            dataGrid_RecentChanges.Columns[1].Width = 170;
-            dataGrid_RecentChanges.Columns[1].DefaultCellStyle.Format = "dd-MM-yyyy hh:mm:ss"; // Timestamp
-            dataGrid_RecentChanges.Columns[2].Width = 150;      // Department
-            dataGrid_RecentChanges.Columns[3].Width = 100;      //Environment
-            dataGrid_RecentChanges.Columns[4].Width = 220;      // Component
-            dataGrid_RecentChanges.Columns[5].Width = 230;
-            dataGrid_RecentChanges.Columns[5].Visible = false;  // ChangedFrom
+            dataGrid_RecentChanges.Columns[1].Width = 35;       //Icao
+            dataGrid_RecentChanges.Columns[2].Width = 170;
+            dataGrid_RecentChanges.Columns[2].DefaultCellStyle.Format = "dd-MM-yyyy hh:mm:ss"; // Timestamp
+            dataGrid_RecentChanges.Columns[3].Width = 150;      // Department
+            dataGrid_RecentChanges.Columns[4].Width = 100;      //Environment
+            dataGrid_RecentChanges.Columns[5].Width = 220;      // Component
             dataGrid_RecentChanges.Columns[6].Width = 230;
-            dataGrid_RecentChanges.Columns[6].Visible = false;  // [ChangedTo]
-            dataGrid_RecentChanges.Columns[7].Width = 150;      // [CreatedBy]
-            dataGrid_RecentChanges.Columns[8].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       // [Purpose]
+            dataGrid_RecentChanges.Columns[6].Visible = false;  // ChangedFrom
+            dataGrid_RecentChanges.Columns[7].Width = 230;
+            dataGrid_RecentChanges.Columns[7].Visible = false;  // [ChangedTo]
+            dataGrid_RecentChanges.Columns[8].Width = 150;      // [CreatedBy]
+            dataGrid_RecentChanges.Columns[9].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;       // [Purpose]
         }
 
         // this function holds the assignment to the individual text boxes to display the selected record details
@@ -531,18 +540,18 @@ namespace login
         {
             // fill the individual Textboxes
             txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); // Id
-            txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); // Timestamp
-            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); // Department
-            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); //Environment
-            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); // Component
-            txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); // ChangedFrom
-            txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); // [ChangedTo]
-            txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  // [Purpose]
-            rtfPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString();  // [Purpose RTF]
-            txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); // [CreatedBy]
+            txtIcao.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); // Id
+            txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); // Timestamp
+            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); // Department
+            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); //Environment
+            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); // Component
+            txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); // ChangedFrom
+            txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); // [ChangedTo]
+            txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[9].Value.ToString();  // [Purpose]
+            txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString(); // [CreatedBy]
         }
 
-        // function to automatically load the data on selection of customer
+        // this function loads data to the datagridview
         void LoadTable()
         {
             // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
@@ -550,28 +559,28 @@ namespace login
             // the query
             string sql;
 
-            sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
+            sql = "SELECT [Id], [IcaoDesignator] as 'Icao', [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
 
             if (comboEnvironment.ToString().Equals(""))
             {
-                sql = sql + " WHERE [AirlineId] like '%" + comboIcao.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                sql = sql + " WHERE [IcaoDesignator] like '%" + comboIcao.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
             }
             else
             {
-                sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
             }
 
             if (comboIcao.SelectedItem == null)
             {
-                sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose]  FROM tbl_ChangeTracking order by [Id] DESC";
+                sql = "SELECT [Id], [IcaoDesignator] as 'Icao', [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose]  FROM tbl_ChangeTracking order by [Id] DESC";
                 // empty all Airline Information text boxes
-                txtIata.Text = "";
-                txt3Digit.Text = "";
-                txtAirlineName.Text = "";
-                txtHub1.Text = "";
-                txtHub2.Text = "";
-                txtCountry.Text = "";
-                txtAirlineDetails.Text = "";
+                txtIata.Clear(); ;
+                txt3Digit.Clear(); ;
+                txtAirlineName.Clear(); ;
+                txtHub1.Clear(); ;
+                txtHub2.Clear(); ;
+                txtCountry.Clear(); ;
+                txtAirlineDetails.Clear(); ;
             }
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
 
@@ -596,6 +605,129 @@ namespace login
 
             // change the dataGrid_RecentChanges table layout
             DisplayRecentChangesResults();
+        }
+        // this function handles the behavior of the textboxes and buttons on Edit
+        void InsertEditUpdateMode()
+        {
+            // INSERT BUTTON
+            if (buttonInsertState == 0 && buttonUpdateState == 0)
+            {
+                // button layout
+                buttonUpdate.Enabled = true;
+                buttonDelete.Enabled = true;
+                buttonInsert.Enabled = true;
+                buttonInsert.Text = "Insert New";
+
+                // color the individual Textboxes
+                txtId.BackColor = Color.FromArgb(224,224,224); // Id
+                txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
+                txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
+                txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
+                txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
+                txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
+                txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
+                txtAuthor.BackColor = Color.FromArgb(224, 224, 224); // [CreatedBy]
+
+                // boxes enabled or disabled
+                txtId.Enabled = false;
+                txtIcao.Enabled = false;
+                txtTimestamp.Enabled = false;
+                txtDepartement.Enabled = false;
+                txtEnvironment.Enabled = false;
+                txtComponent.Enabled = false;
+                txtChangedFrom.Enabled = false;
+                txtChangedTo.Enabled = false;
+                txtPurpose.Enabled = false;
+                txtAuthor.Enabled = false;
+            }
+            else if (buttonInsertState == 1 && buttonUpdateState == 0)
+            {
+                // clear the individual Textboxes
+                txtId.Clear(); // Id
+                // txtIcao.Clear(); //Icao
+                txtTimestamp.Clear(); // Timestamp
+                txtDepartement.Clear(); // Department
+                txtEnvironment.Clear(); //Environment
+                txtComponent.Clear(); // Component
+                txtChangedFrom.Clear(); // ChangedFrom
+                txtChangedTo.Clear(); // [ChangedTo]
+                txtPurpose.Clear();  // [Purpose]
+                txtAuthor.Clear(); // [CreatedBy]
+
+                // button layout
+                buttonUpdate.Enabled = false;
+                buttonDelete.Enabled = false;
+                buttonInsert.Enabled = true;
+                buttonInsert.Text = "Save";
+
+                // color the individual Textboxes
+                txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
+                txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
+                txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
+                txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
+                txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
+                txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
+                txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
+                txtAuthor.BackColor = Color.FromArgb(224, 224, 224); // [CreatedBy]
+
+                // boxes enabled or disabled
+                txtId.Enabled = false;
+                txtIcao.Enabled = true;
+                txtTimestamp.Enabled = false;
+                txtDepartement.Enabled = true;
+                txtEnvironment.Enabled = true;
+                txtComponent.Enabled = true;
+                txtChangedFrom.Enabled = true;
+                txtChangedTo.Enabled = true;
+                txtPurpose.Enabled = true;
+                txtAuthor.Enabled = true;
+            }
+
+            // UPDATE BUTTON
+            if (buttonUpdateState == 0 && buttonInsertState == 0)
+            {
+                // button layout
+                buttonUpdate.Enabled = true;
+                buttonDelete.Enabled = true;
+                buttonInsert.Enabled = true;
+                buttonUpdate.Text = "Edit";
+            }
+            else
+            {
+                // button layout
+                buttonUpdate.Enabled = true;
+                buttonDelete.Enabled = false;
+                buttonInsert.Enabled = false;
+                buttonUpdate.Text = "Update...";
+
+                // boxes enabled or disabled
+                txtId.Enabled = false;
+                txtIcao.Enabled = true;
+                txtTimestamp.Enabled = false;
+                txtDepartement.Enabled = true;
+                txtEnvironment.Enabled = true;
+                txtComponent.Enabled = true;
+                txtChangedFrom.Enabled = true;
+                txtChangedTo.Enabled = true;
+                txtPurpose.Enabled = true;
+                txtAuthor.Enabled = true;
+
+                // color the individual Textboxes
+                //txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
+                //txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
+                //txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
+                //txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
+                //txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                //txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                //txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
+                //txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
+                //txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
+                //txtAuthor.BackColor = Color.FromArgb(224, 224, 224); // [CreatedBy]
+            }
         }
 
         private void timerRefreshRecentChanges_Tick(object sender, EventArgs e)
@@ -649,6 +781,12 @@ namespace login
                 // load ID of change as integer into variable
                 LastLoadedItem = Convert.ToInt32(txtId.Text);
                 //MessageBox.Show("your item is: " + LastLoadedItem);
+
+                // change the state of the button
+                buttonInsertState = 0;
+                // change label and visible state of Edit buttons, change textbox colors
+                InsertEditUpdateMode();
+
             }
             else
             {
@@ -669,11 +807,11 @@ namespace login
                 // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Component] like '%" + txtSearch.Text + "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Component] like '%" + txtSearch.Text + "%' AND ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Component] like '%" + txtSearch.Text + "%'ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Component] like '%" + txtSearch.Text + "%'ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -699,11 +837,11 @@ namespace login
                 // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%'AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%'AND [CreatedBy] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -729,11 +867,11 @@ namespace login
                 // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Department] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -759,11 +897,11 @@ namespace login
                 // the query
                 if (comboEnvironment.ToString().Equals(""))
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 else
                 {
-                    sql = sql + " WHERE [AirlineId] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
+                    sql = sql + " WHERE [IcaoDesignator] = '" + comboIcao.Text + "' AND [Environment] like '%" + comboEnvironment.Text + "%' AND [Purpose] like '%" + txtSearch.Text + "%' ORDER BY [Id] DESC, [Timestamp] DESC;";
                 }
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
@@ -796,34 +934,134 @@ namespace login
             }
             else
             {
-                //comboIcao.Text = "";
-                //comboEnvironment.Text = "";
+                //comboIcao..Clear();;
+                //comboEnvironment.Clear();;
                 //MessageBox.Show("Please select a customer from the ICAO dropdown first!");
             }
         }
         private void comboSearch_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtSearch.Text = "";
+            txtSearch.Clear(); ;
         }
         private void buttonInsert_Click(object sender, EventArgs e)
         {
+            if (buttonInsertState == 0)
+            {
+                // change the state of the button
+                buttonInsertState = 1;
+                buttonUpdateState = 0;
+
+                // change label and visible state of Edit buttons, change textbox colors
+                InsertEditUpdateMode();
+
+                // put Cursor in first textfield
+                txtDepartement.Focus();
+
+                // NOW datainput can start
+                // data validation before insert is required!
+            }
+            else
+            {
+                SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+                string sql = "INSERT INTO tbl_ChangeTracking ([IcaoDesignator],[Timestamp],[Department],[Environment],[Component],[ChangedFrom],[ChangedTo],[Purpose],[CreatedBy]) SELECT '" + comboIcao.Text + "',getUTCdate(), '" + txtDepartement.Text + "','" + txtEnvironment.Text + "', '" + txtComponent.Text + "', '" + txtChangedFrom.Text + "', '" + txtChangedTo.Text + "', '" + txtPurpose.Text + "', '" + txtAuthor.Text + "'; ";
+                SqlCommand cmd = new SqlCommand(sql, sqlcon);
+                try
+                {
+                    sqlcon.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("New record inserted!");
+
+                    // change the state of the button
+                    buttonInsertState = 0;
+                    buttonUpdateState = 0;
+
+                    // change label and visible state of Edit buttons, change textbox colors
+                    InsertEditUpdateMode();
+                    
+                    // show new records
+                    LoadTable();
+                }
+                catch (Exception exptn)
+                {
+                    // should maybe replaced by hidden Text field!!!! 
+                    MessageBox.Show(exptn.Message);
+                }
+            }
+
+        }
+        private void buttonUpdate_Click(object sender, EventArgs e)
+        {
+            if (buttonUpdateState == 0)
+            {
+                // change the state of the button
+                buttonInsertState = 0;
+                buttonUpdateState = 1;
+
+                // change label and visible state of Edit buttons, change textbox colors
+                InsertEditUpdateMode();
+
+                // put Cursor in first textfield
+                txtDepartement.Focus();
+
+                // NOW datainput can start
+                // data validation before insert is required!
+            }
+            else
+            {
+                SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+                string sql = "UPDATE tbl_ChangeTracking SET [IcaoDesignator] = '" + comboIcao.Text + "', [Timestamp] = getUTCdate(), [Department] = '" + txtDepartement.Text + "', [Environment] = '" + txtEnvironment.Text + "', [Component] = '" + txtComponent.Text + "', [ChangedFrom] = '" + txtChangedFrom.Text + "', [ChangedTo] = '" + txtChangedTo.Text + "', [Purpose] = '" + txtPurpose.Text + "', [CreatedBy] = '" + txtAuthor.Text + "' WHERE [Id] = '" + txtId.Text + "'; ";
+                SqlCommand cmd = new SqlCommand(sql, sqlcon);
+                try
+                {
+                    sqlcon.Open();
+                    cmd.ExecuteNonQuery();
+                    MessageBox.Show("Record updated!");
+
+                    // change the state of the button
+                    buttonInsertState = 0;
+                    buttonUpdateState = 0;
+                    // change label and visible state of Edit buttons, change textbox colors
+                    InsertEditUpdateMode();
+                    // show new records
+                    LoadTable();
+                }
+                catch (Exception exptn)
+                {
+                    // should maybe replaced by hidden Text field!!!! 
+                    MessageBox.Show(exptn.Message);
+                }
+            }
+        }
+        private void buttonDelete_Click(object sender, EventArgs e)
+        {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-            string sql = "INSERT INTO tbl_ChangeTracking ([AirlineId],[Timestamp],[Department],[Environment],[Component],[ChangedFrom],[ChangedTo],[Purpose],[CreatedBy]) SELECT '" + comboIcao.Text + "',getUTCdate(), '" + txtDepartement.Text + "','" + txtEnvironment.Text + "', '" + txtComponent.Text + "', '" + txtChangedFrom.Text + "', '" + txtChangedTo.Text + "', '" + txtPurpose.Text + "', '" + txtAuthor.Text + "'; ";
+            string sql = "DELETE FROM tbl_ChangeTracking WHERE [Id] = '" + txtId.Text + "'; ";
             SqlCommand cmd = new SqlCommand(sql, sqlcon);
             try
             {
                 sqlcon.Open();
                 cmd.ExecuteNonQuery();
-                MessageBox.Show("New record inserted!");
+                MessageBox.Show("Record deleted!");
+                // change label and visible state of Edit buttons, change textbox colors
+                InsertEditUpdateMode();
+                // show new records
+                LoadTable();
             }
             catch (Exception exptn)
             {
                 // should maybe replaced by hidden Text field!!!! 
                 MessageBox.Show(exptn.Message);
-                // show new records
-                LoadTable();
             }
         }
+        private void TextboxEdit_Enter(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.LightBlue;
+        }
+        private void TextboxEdit_Leave(object sender, EventArgs e)
+        {
+            ((TextBox)sender).BackColor = Color.White;
+        }
+
     }
 }
 
