@@ -19,16 +19,21 @@ namespace login
 
             // function loads data into the Icao dropdown
             FillIcaoComboBox();
+            FillDepartmentComboBox();
+            FillEnvComboBox();
+            FillComponentComboBox();
             // funcction loads data into the Environment dropdown
             FillEnvironmentComboBox();
-            // function Autocomplete for Icao dropdown
-            AutoCompleteText();
+            // function for Autocomplete dropdown boxes
+            AutoCompleteTextIcaoDesignator();
+            AutoCompleteTextDepartment();
+            AutoCompleteComboEnv();
+            AutoCompleteComboComponent();
+
             // function Load data into Recent Changes grid
             LoadTable();
             // function show/hide edit buttons
-            InsertEditUpdateMode();
-
-            
+            InsertEditUpdateMode();           
         }
 
         bool isTopPanelDragged = false;
@@ -309,7 +314,7 @@ namespace login
             TopPanel_MouseUp(sender, e);
         }
 
-        // This code fills the combobox which holds the [IcaoDesignator] data from the table tbl_Airlines
+        // This code fills the comboboxes
         public void FillIcaoComboBox()
         {
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
@@ -335,8 +340,31 @@ namespace login
 
             sqlcon.Close();
         }
+        public void FillDepartmentComboBox()
+        {
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Department] FROM tbl_Departments order by [Department] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
 
-        // This code fills the [Environment] combobox
+                while (myReader.Read())
+                {
+                    string sName = myReader.GetString(0);
+                    comboDepartment.Items.Add(sName);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+
+            sqlcon.Close();
+        }
         public void FillEnvironmentComboBox()
         {
             // clear all data from combobox
@@ -380,9 +408,59 @@ namespace login
 
             sqlcon.Close();
         }
+        public void FillEnvComboBox()
+        {
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Environment] FROM tbl_Environments order by [Environment] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
 
-        // function for autocomplete IcaoDesignator Dropbdown
-        void AutoCompleteText()
+                while (myReader.Read())
+                {
+                    string sName = myReader.GetString(0);
+                    comboEnv.Items.Add(sName);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+
+            sqlcon.Close();
+        }
+        public void FillComponentComboBox()
+        {
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Component] FROM tbl_Components order by [Component] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string sName = myReader.GetString(0);
+                    comboComponent.Items.Add(sName);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+
+            sqlcon.Close();
+        }
+
+        // function for autocomplete comboboxes
+        void AutoCompleteTextIcaoDesignator()
         {
             comboIcao.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboIcao.AutoCompleteSource = AutoCompleteSource.CustomSource;
@@ -413,6 +491,102 @@ namespace login
             }
             // load the autocomplete data into combobox
             comboIcao.AutoCompleteCustomSource = coll;
+        }
+        void AutoCompleteTextDepartment()
+        {
+            comboDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboDepartment.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // coll is the variable defined to hold the collection - this should be the data from the database table
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+            // database connection and query
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Department] FROM tbl_Departments order by [Department] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string comboDepartment = myReader.GetString(0);
+                    coll.Add(comboDepartment);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+            // load the autocomplete data into combobox
+            comboDepartment.AutoCompleteCustomSource = coll;
+        }
+        void AutoCompleteComboEnv()
+        {
+            comboEnv.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboEnv.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // coll is the variable defined to hold the collection - this should be the data from the database table
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+            // database connection and query
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Environment] FROM tbl_Environments order by [Environment] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string comboEnv = myReader.GetString(0);
+                    coll.Add(comboEnv);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+            // load the autocomplete data into combobox
+            comboEnv.AutoCompleteCustomSource = coll;
+        }
+        void AutoCompleteComboComponent()
+        {
+            comboComponent.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboComponent.AutoCompleteSource = AutoCompleteSource.CustomSource;
+
+            // coll is the variable defined to hold the collection - this should be the data from the database table
+            AutoCompleteStringCollection coll = new AutoCompleteStringCollection();
+
+            // database connection and query
+            SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
+            string sql = "SELECT [Component] FROM tbl_Components order by [Component] ASC";
+            SqlCommand cmd = new SqlCommand(sql, sqlcon);
+            SqlDataReader myReader;
+            try
+            {
+                sqlcon.Open();
+                myReader = cmd.ExecuteReader();
+
+                while (myReader.Read())
+                {
+                    string comboComponent = myReader.GetString(0);
+                    coll.Add(comboComponent);
+                }
+            }
+            catch (Exception exptn)
+            {
+                // should maybe replaced by hidden Text field!!!! 
+                MessageBox.Show(exptn.Message);
+            }
+            // load the autocomplete data into combobox
+            comboComponent.AutoCompleteCustomSource = coll;
         }
 
         // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
@@ -487,7 +661,6 @@ namespace login
             // enable timer
             timerNotification.Enabled = true;
         }
-
         private void comboEnvironment_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Load data to Recent Changes datagrid
@@ -498,9 +671,8 @@ namespace login
                 // fill the individual Textboxes with the latest change
                 DisplayRecentSelectResult();
 
-                // load ID of change as integer into variable
-                //LastLoadedItem = Convert.ToInt32(txtId.Text);
-                //MessageBox.Show("your item is: " + LastLoadedItem);
+                // clear text searchbox
+                txtSearch.Clear();
             }
             else
             {
@@ -515,8 +687,12 @@ namespace login
             // enable timer
             timerNotification.Enabled = true;
         }
-
-        // the recentChanges table results layout
+        private void comboSearch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearch.Clear(); ;
+        }
+        
+        // RecentChanges datagrid layout
         void DisplayRecentChangesResults()
         {
             // change the dataGrid_RecentChanges table layout
@@ -542,15 +718,15 @@ namespace login
             txtId.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[0].Value.ToString(); // Id
             txtIcao.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[1].Value.ToString(); // Id
             txtTimestamp.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[2].Value.ToString(); // Timestamp
-            txtDepartement.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); // Department
-            txtEnvironment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); //Environment
-            txtComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); // Component
+            comboDepartment.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[3].Value.ToString(); // Department
+            comboEnv.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[4].Value.ToString(); //Environment
+            comboComponent.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[5].Value.ToString(); // Component
             txtChangedFrom.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[6].Value.ToString(); // ChangedFrom
             txtChangedTo.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[7].Value.ToString(); // [ChangedTo]
             txtPurpose.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[9].Value.ToString();  // [Purpose]
             txtAuthor.Text = dataGrid_RecentChanges.SelectedRows[0].Cells[8].Value.ToString(); // [CreatedBy]
         }
-
+        
         // this function loads data to the datagridview
         void LoadTable()
         {
@@ -613,18 +789,25 @@ namespace login
             if (buttonInsertState == 0 && buttonUpdateState == 0)
             {
                 // button layout
+                buttonInsert.Enabled = true;
                 buttonUpdate.Enabled = true;
                 buttonDelete.Enabled = true;
-                buttonInsert.Enabled = true;
+                buttonInsert.BackColor = Color.White;
+                buttonUpdate.BackColor = Color.White;
+                buttonDelete.BackColor = Color.White;
+                buttonInsert.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+
                 buttonInsert.Text = "Insert New";
 
                 // color the individual Textboxes
                 txtId.BackColor = Color.FromArgb(224,224,224); // Id
                 txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
                 txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
-                txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
-                txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
-                txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                comboDepartment.BackColor = Color.FromArgb(224, 224, 224); // Department
+                comboEnv.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                comboComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
                 txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
                 txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
                 txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
@@ -634,9 +817,9 @@ namespace login
                 txtId.Enabled = false;
                 txtIcao.Enabled = false;
                 txtTimestamp.Enabled = false;
-                txtDepartement.Enabled = false;
-                txtEnvironment.Enabled = false;
-                txtComponent.Enabled = false;
+                comboDepartment.Enabled = false;
+                comboEnv.Enabled = false;
+                comboComponent.Enabled = false;
                 txtChangedFrom.Enabled = false;
                 txtChangedTo.Enabled = false;
                 txtPurpose.Enabled = false;
@@ -648,27 +831,34 @@ namespace login
                 txtId.Clear(); // Id
                 // txtIcao.Clear(); //Icao
                 txtTimestamp.Clear(); // Timestamp
-                txtDepartement.Clear(); // Department
-                txtEnvironment.Clear(); //Environment
-                txtComponent.Clear(); // Component
+                comboDepartment.Text = ""; // Department
+                comboEnv.Text = ""; //Environment
+                comboComponent.Text = ""; // Component
                 txtChangedFrom.Clear(); // ChangedFrom
                 txtChangedTo.Clear(); // [ChangedTo]
                 txtPurpose.Clear();  // [Purpose]
                 txtAuthor.Clear(); // [CreatedBy]
 
                 // button layout
+                buttonInsert.Enabled = true;
                 buttonUpdate.Enabled = false;
                 buttonDelete.Enabled = false;
-                buttonInsert.Enabled = true;
+                buttonInsert.BackColor = Color.White;
+                buttonUpdate.BackColor = Color.FromArgb(224, 224, 224);
+                buttonDelete.BackColor = Color.FromArgb(224, 224, 224);
+                buttonInsert.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(224, 224, 224);
+                buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(224, 224, 224);
+
                 buttonInsert.Text = "Save";
 
                 // color the individual Textboxes
                 txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
                 txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
                 txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
-                txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
-                txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
-                txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                comboDepartment.BackColor = Color.FromArgb(224, 224, 224); // Department
+                comboEnv.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                comboComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
                 txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
                 txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
                 txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
@@ -678,9 +868,9 @@ namespace login
                 txtId.Enabled = false;
                 txtIcao.Enabled = true;
                 txtTimestamp.Enabled = false;
-                txtDepartement.Enabled = true;
-                txtEnvironment.Enabled = true;
-                txtComponent.Enabled = true;
+                comboDepartment.Enabled = true;
+                comboEnv.Enabled = true;
+                comboComponent.Enabled = true;
                 txtChangedFrom.Enabled = true;
                 txtChangedTo.Enabled = true;
                 txtPurpose.Enabled = true;
@@ -691,42 +881,54 @@ namespace login
             if (buttonUpdateState == 0 && buttonInsertState == 0)
             {
                 // button layout
+                buttonInsert.Enabled = true;
                 buttonUpdate.Enabled = true;
                 buttonDelete.Enabled = true;
-                buttonInsert.Enabled = true;
+                buttonInsert.BackColor = Color.White;
+                buttonUpdate.BackColor = Color.White;
+                buttonDelete.BackColor = Color.White;
+                buttonInsert.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
                 buttonUpdate.Text = "Edit";
             }
-            else
+            else if (buttonUpdateState == 1 && buttonInsertState == 0)
             {
                 // button layout
+                buttonInsert.Enabled = false;
                 buttonUpdate.Enabled = true;
                 buttonDelete.Enabled = false;
-                buttonInsert.Enabled = false;
+                buttonDelete.BackColor = Color.FromArgb(224, 224, 224);
+                buttonUpdate.BackColor = Color.White;
+                buttonInsert.BackColor = Color.FromArgb(224, 224, 224);
+                buttonInsert.FlatAppearance.BorderColor = Color.FromArgb(224, 224, 224);
+                buttonUpdate.FlatAppearance.BorderColor = Color.FromArgb(25, 152, 97);
+                buttonDelete.FlatAppearance.BorderColor = Color.FromArgb(224, 224, 224);
                 buttonUpdate.Text = "Update...";
 
                 // boxes enabled or disabled
                 txtId.Enabled = false;
                 txtIcao.Enabled = true;
                 txtTimestamp.Enabled = false;
-                txtDepartement.Enabled = true;
-                txtEnvironment.Enabled = true;
-                txtComponent.Enabled = true;
+                comboDepartment.Enabled = true;
+                comboEnv.Enabled = true;
+                comboComponent.Enabled = true;
                 txtChangedFrom.Enabled = true;
                 txtChangedTo.Enabled = true;
                 txtPurpose.Enabled = true;
                 txtAuthor.Enabled = true;
 
-                // color the individual Textboxes
-                //txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
-                //txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
-                //txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
-                //txtDepartement.BackColor = Color.FromArgb(224, 224, 224); // Department
-                //txtEnvironment.BackColor = Color.FromArgb(224, 224, 224); //Environment
-                //txtComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
-                //txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
-                //txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
-                //txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
-                //txtAuthor.BackColor = Color.FromArgb(224, 224, 224); // [CreatedBy]
+                //color the individual Textboxes
+                txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
+                txtIcao.BackColor = Color.FromArgb(224, 224, 224); // Icao
+                txtTimestamp.BackColor = Color.FromArgb(224, 224, 224); // Timestamp
+                comboDepartment.BackColor = Color.FromArgb(224, 224, 224); // Department
+                comboEnv.BackColor = Color.FromArgb(224, 224, 224); //Environment
+                comboComponent.BackColor = Color.FromArgb(224, 224, 224); // Component
+                txtChangedFrom.BackColor = Color.FromArgb(224, 224, 224); // ChangedFrom
+                txtChangedTo.BackColor = Color.FromArgb(224, 224, 224); // [ChangedTo]
+                txtPurpose.BackColor = Color.FromArgb(224, 224, 224);  // [Purpose]
+                txtAuthor.BackColor = Color.FromArgb(224, 224, 224); // [CreatedBy]
             }
         }
 
@@ -784,6 +986,8 @@ namespace login
 
                 // change the state of the button
                 buttonInsertState = 0;
+                buttonUpdateState = 0;
+
                 // change label and visible state of Edit buttons, change textbox colors
                 InsertEditUpdateMode();
 
@@ -800,7 +1004,7 @@ namespace login
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
             string sql;
-            sql = "SELECT [Id], [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
+            sql = "SELECT [Id], [IcaoDesignator] as 'Icao', [Timestamp] as 'Changed', [Department], [Environment],  [Component], [ChangedFrom], [ChangedTo], [CreatedBy] as 'Author', [Purpose] FROM tbl_ChangeTracking";
 
             if (comboSearch.Text == "Component")
             {
@@ -939,10 +1143,7 @@ namespace login
                 //MessageBox.Show("Please select a customer from the ICAO dropdown first!");
             }
         }
-        private void comboSearch_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            txtSearch.Clear(); ;
-        }
+
         private void buttonInsert_Click(object sender, EventArgs e)
         {
             if (buttonInsertState == 0)
@@ -955,7 +1156,8 @@ namespace login
                 InsertEditUpdateMode();
 
                 // put Cursor in first textfield
-                txtDepartement.Focus();
+                //txtDepartment.Focus();
+                comboDepartment.Focus();
 
                 // NOW datainput can start
                 // data validation before insert is required!
@@ -963,7 +1165,7 @@ namespace login
             else
             {
                 SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-                string sql = "INSERT INTO tbl_ChangeTracking ([IcaoDesignator],[Timestamp],[Department],[Environment],[Component],[ChangedFrom],[ChangedTo],[Purpose],[CreatedBy]) SELECT '" + comboIcao.Text + "',getUTCdate(), '" + txtDepartement.Text + "','" + txtEnvironment.Text + "', '" + txtComponent.Text + "', '" + txtChangedFrom.Text + "', '" + txtChangedTo.Text + "', '" + txtPurpose.Text + "', '" + txtAuthor.Text + "'; ";
+                string sql = "INSERT INTO tbl_ChangeTracking ([IcaoDesignator],[Timestamp],[Department],[Environment],[Component],[ChangedFrom],[ChangedTo],[Purpose],[CreatedBy]) SELECT '" + txtIcao.Text + "',getUTCdate(), '" + comboDepartment.Text + "','" + comboEnv.Text + "', '" + comboComponent.Text + "', '" + txtChangedFrom.Text + "', '" + txtChangedTo.Text + "', '" + txtPurpose.Text + "', '" + txtAuthor.Text + "'; ";
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
                 {
@@ -1001,7 +1203,8 @@ namespace login
                 InsertEditUpdateMode();
 
                 // put Cursor in first textfield
-                txtDepartement.Focus();
+                //txtDepartment.Focus();
+                comboDepartment.Focus();
 
                 // NOW datainput can start
                 // data validation before insert is required!
@@ -1009,7 +1212,7 @@ namespace login
             else
             {
                 SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
-                string sql = "UPDATE tbl_ChangeTracking SET [IcaoDesignator] = '" + comboIcao.Text + "', [Timestamp] = getUTCdate(), [Department] = '" + txtDepartement.Text + "', [Environment] = '" + txtEnvironment.Text + "', [Component] = '" + txtComponent.Text + "', [ChangedFrom] = '" + txtChangedFrom.Text + "', [ChangedTo] = '" + txtChangedTo.Text + "', [Purpose] = '" + txtPurpose.Text + "', [CreatedBy] = '" + txtAuthor.Text + "' WHERE [Id] = '" + txtId.Text + "'; ";
+                string sql = "UPDATE tbl_ChangeTracking SET [IcaoDesignator] = '" + txtIcao.Text + "', [Timestamp] = getUTCdate(), [Department] = '" + comboDepartment.Text + "', [Environment] = '" + comboEnv.Text + "', [Component] = '" + comboComponent.Text + "', [ChangedFrom] = '" + txtChangedFrom.Text + "', [ChangedTo] = '" + txtChangedTo.Text + "', [Purpose] = '" + txtPurpose.Text + "', [CreatedBy] = '" + txtAuthor.Text + "' WHERE [Id] = '" + txtId.Text + "'; ";
                 SqlCommand cmd = new SqlCommand(sql, sqlcon);
                 try
                 {

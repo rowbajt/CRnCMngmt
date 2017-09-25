@@ -73,9 +73,6 @@
             this.timerNotification = new System.Windows.Forms.Timer(this.components);
             this.txtId = new System.Windows.Forms.TextBox();
             this.txtTimestamp = new System.Windows.Forms.TextBox();
-            this.txtDepartement = new System.Windows.Forms.TextBox();
-            this.txtEnvironment = new System.Windows.Forms.TextBox();
-            this.txtComponent = new System.Windows.Forms.TextBox();
             this.txtChangedFrom = new System.Windows.Forms.TextBox();
             this.txtChangedTo = new System.Windows.Forms.TextBox();
             this.txtPurpose = new System.Windows.Forms.TextBox();
@@ -103,6 +100,9 @@
             this.buttonDelete = new System.Windows.Forms.Button();
             this.txtIcao = new System.Windows.Forms.TextBox();
             this.labelTxtIcao = new System.Windows.Forms.Label();
+            this.comboDepartment = new System.Windows.Forms.ComboBox();
+            this.comboEnv = new System.Windows.Forms.ComboBox();
+            this.comboComponent = new System.Windows.Forms.ComboBox();
             this.MinimizeButton = new login.ButtonZ();
             this.MaxButton = new login.MinMaxButton();
             this.CloserButton = new login.ButtonZ();
@@ -511,44 +511,8 @@
             this.txtTimestamp.Enabled = false;
             this.txtTimestamp.Location = new System.Drawing.Point(515, 106);
             this.txtTimestamp.Name = "txtTimestamp";
-            this.txtTimestamp.Size = new System.Drawing.Size(221, 24);
+            this.txtTimestamp.Size = new System.Drawing.Size(245, 24);
             this.txtTimestamp.TabIndex = 101;
-            // 
-            // txtDepartement
-            // 
-            this.txtDepartement.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtDepartement.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDepartement.Enabled = false;
-            this.txtDepartement.Location = new System.Drawing.Point(766, 106);
-            this.txtDepartement.Name = "txtDepartement";
-            this.txtDepartement.Size = new System.Drawing.Size(368, 24);
-            this.txtDepartement.TabIndex = 102;
-            this.txtDepartement.Enter += new System.EventHandler(this.TextboxEdit_Enter);
-            this.txtDepartement.Leave += new System.EventHandler(this.TextboxEdit_Leave);
-            // 
-            // txtEnvironment
-            // 
-            this.txtEnvironment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtEnvironment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEnvironment.Enabled = false;
-            this.txtEnvironment.Location = new System.Drawing.Point(368, 152);
-            this.txtEnvironment.Name = "txtEnvironment";
-            this.txtEnvironment.Size = new System.Drawing.Size(142, 24);
-            this.txtEnvironment.TabIndex = 103;
-            this.txtEnvironment.Enter += new System.EventHandler(this.TextboxEdit_Enter);
-            this.txtEnvironment.Leave += new System.EventHandler(this.TextboxEdit_Leave);
-            // 
-            // txtComponent
-            // 
-            this.txtComponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtComponent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtComponent.Enabled = false;
-            this.txtComponent.Location = new System.Drawing.Point(515, 152);
-            this.txtComponent.Name = "txtComponent";
-            this.txtComponent.Size = new System.Drawing.Size(221, 24);
-            this.txtComponent.TabIndex = 104;
-            this.txtComponent.Enter += new System.EventHandler(this.TextboxEdit_Enter);
-            this.txtComponent.Leave += new System.EventHandler(this.TextboxEdit_Leave);
             // 
             // txtChangedFrom
             // 
@@ -558,7 +522,7 @@
             this.txtChangedFrom.Location = new System.Drawing.Point(368, 198);
             this.txtChangedFrom.Multiline = true;
             this.txtChangedFrom.Name = "txtChangedFrom";
-            this.txtChangedFrom.Size = new System.Drawing.Size(368, 69);
+            this.txtChangedFrom.Size = new System.Drawing.Size(392, 69);
             this.txtChangedFrom.TabIndex = 106;
             this.txtChangedFrom.Enter += new System.EventHandler(this.TextboxEdit_Enter);
             this.txtChangedFrom.Leave += new System.EventHandler(this.TextboxEdit_Leave);
@@ -781,6 +745,7 @@
             // 
             this.buttonInsert.BackColor = System.Drawing.SystemColors.Window;
             this.buttonInsert.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonInsert.FlatAppearance.BorderSize = 2;
             this.buttonInsert.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             this.buttonInsert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.buttonInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -798,6 +763,7 @@
             // 
             this.buttonUpdate.BackColor = System.Drawing.SystemColors.Window;
             this.buttonUpdate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonUpdate.FlatAppearance.BorderSize = 2;
             this.buttonUpdate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             this.buttonUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.buttonUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -815,6 +781,7 @@
             // 
             this.buttonDelete.BackColor = System.Drawing.SystemColors.Window;
             this.buttonDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.buttonDelete.FlatAppearance.BorderSize = 2;
             this.buttonDelete.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             this.buttonDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -847,6 +814,41 @@
             this.labelTxtIcao.Size = new System.Drawing.Size(35, 15);
             this.labelTxtIcao.TabIndex = 118;
             this.labelTxtIcao.Text = "Icao";
+            // 
+            // comboDepartment
+            // 
+            this.comboDepartment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboDepartment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboDepartment.Font = new System.Drawing.Font("Consolas", 10.75F, System.Drawing.FontStyle.Bold);
+            this.comboDepartment.FormattingEnabled = true;
+            this.comboDepartment.Location = new System.Drawing.Point(766, 108);
+            this.comboDepartment.Name = "comboDepartment";
+            this.comboDepartment.Size = new System.Drawing.Size(367, 25);
+            this.comboDepartment.TabIndex = 120;
+            // 
+            // comboEnv
+            // 
+            this.comboEnv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboEnv.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.tblChangeTrackingBindingSource1, "Environment", true));
+            this.comboEnv.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboEnv.Font = new System.Drawing.Font("Consolas", 10.75F, System.Drawing.FontStyle.Bold);
+            this.comboEnv.FormattingEnabled = true;
+            this.comboEnv.Location = new System.Drawing.Point(369, 151);
+            this.comboEnv.Name = "comboEnv";
+            this.comboEnv.Size = new System.Drawing.Size(140, 25);
+            this.comboEnv.TabIndex = 121;
+            // 
+            // comboComponent
+            // 
+            this.comboComponent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.comboComponent.DataBindings.Add(new System.Windows.Forms.Binding("SelectedValue", this.tblChangeTrackingBindingSource1, "Environment", true));
+            this.comboComponent.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboComponent.Font = new System.Drawing.Font("Consolas", 10.75F, System.Drawing.FontStyle.Bold);
+            this.comboComponent.FormattingEnabled = true;
+            this.comboComponent.Location = new System.Drawing.Point(515, 151);
+            this.comboComponent.Name = "comboComponent";
+            this.comboComponent.Size = new System.Drawing.Size(245, 25);
+            this.comboComponent.TabIndex = 122;
             // 
             // MinimizeButton
             // 
@@ -923,6 +925,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.ClientSize = new System.Drawing.Size(1156, 769);
+            this.Controls.Add(this.comboComponent);
+            this.Controls.Add(this.comboEnv);
+            this.Controls.Add(this.comboDepartment);
             this.Controls.Add(this.labelTxtIcao);
             this.Controls.Add(this.txtIcao);
             this.Controls.Add(this.buttonDelete);
@@ -949,9 +954,6 @@
             this.Controls.Add(this.txtPurpose);
             this.Controls.Add(this.txtChangedTo);
             this.Controls.Add(this.txtChangedFrom);
-            this.Controls.Add(this.txtComponent);
-            this.Controls.Add(this.txtEnvironment);
-            this.Controls.Add(this.txtDepartement);
             this.Controls.Add(this.txtTimestamp);
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.labelRefreshIndicator);
@@ -1044,9 +1046,6 @@
         private System.Windows.Forms.Timer timerNotification;
         private System.Windows.Forms.TextBox txtId;
         private System.Windows.Forms.TextBox txtTimestamp;
-        private System.Windows.Forms.TextBox txtDepartement;
-        private System.Windows.Forms.TextBox txtEnvironment;
-        private System.Windows.Forms.TextBox txtComponent;
         private System.Windows.Forms.TextBox txtChangedFrom;
         private System.Windows.Forms.TextBox txtChangedTo;
         private System.Windows.Forms.TextBox txtPurpose;
@@ -1075,5 +1074,8 @@
         private System.Windows.Forms.Button buttonDelete;
         private System.Windows.Forms.TextBox txtIcao;
         private System.Windows.Forms.Label labelTxtIcao;
+        private System.Windows.Forms.ComboBox comboDepartment;
+        private System.Windows.Forms.ComboBox comboEnv;
+        private System.Windows.Forms.ComboBox comboComponent;
     }
 }

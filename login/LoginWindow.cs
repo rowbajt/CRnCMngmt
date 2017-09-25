@@ -73,11 +73,6 @@ namespace login
             sqlcon.Close();
         }
 
-        private void LOGIN_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtMessage_TextChanged(object sender, EventArgs e)
         {
             /// hide txtMessage
