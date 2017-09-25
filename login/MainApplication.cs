@@ -13,9 +13,12 @@ namespace login
 {
     public partial class MainApplication : Form
     {
-        public MainApplication()
+        public MainApplication(string userLoggedOn)
         {
             InitializeComponent();
+
+            // retrieve the txtUserLoggedOn from the loin form
+            txtUserLoggedOn.Text = userLoggedOn;
 
             // function loads data into the Icao dropdown
             FillIcaoComboBox();
@@ -301,18 +304,27 @@ namespace login
             objloginWithDatabases.Show();
         }
         // Code to move windows when clicking on WindowTextLabel
-        private void WindowTextLabel_MouseDown(object sender, MouseEventArgs e)
+        private void labelLogout_MouseDown(object sender, MouseEventArgs e)
         {
             TopPanel_MouseDown(sender, e);
         }
-        private void WindowTextLabel_MouseMove(object sender, MouseEventArgs e)
+        private void labelLogout_MouseMove(object sender, MouseEventArgs e)
         {
             TopPanel_MouseMove(sender, e);
         }
-        private void WindowTextLabel_MouseUp(object sender, MouseEventArgs e)
+        private void labelLogout_MouseUp(object sender, MouseEventArgs e)
         {
             TopPanel_MouseUp(sender, e);
         }
+        private void panelLogout_MouseHover(object sender, EventArgs e)
+        {
+            panelLogout.BackgroundImage = Properties.Resources.BackgroundLogoutBtnGreen;
+        }
+        private void panelLogout_MouseLeave(object sender, EventArgs e)
+        {
+            panelLogout.BackgroundImage = Properties.Resources.BackgroundLogoutBtn;
+        }
+
 
         // This code fills the comboboxes
         public void FillIcaoComboBox()
@@ -592,6 +604,12 @@ namespace login
         // This code takes the loaded data based on the [IcaoDesignator] chosen in the comboICAO box and fills the remaining textfields
         private void comboIcao_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // change button layout
+            buttonInsertState = 0;
+            buttonUpdateState = 0;
+            // reset Edit buttons
+            InsertEditUpdateMode();
+
             SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
             string sql = "SELECT * FROM tbl_Airlines WHERE [IcaoDesignator] = '" + comboIcao.Text + "';";
@@ -838,6 +856,7 @@ namespace login
                 txtChangedTo.Clear(); // [ChangedTo]
                 txtPurpose.Clear();  // [Purpose]
                 txtAuthor.Clear(); // [CreatedBy]
+                txtAuthor.Text = txtUserLoggedOn.Text; // load the user logged in
 
                 // button layout
                 buttonInsert.Enabled = true;
@@ -874,7 +893,7 @@ namespace login
                 txtChangedFrom.Enabled = true;
                 txtChangedTo.Enabled = true;
                 txtPurpose.Enabled = true;
-                txtAuthor.Enabled = true;
+                txtAuthor.Enabled = false;
             }
 
             // UPDATE BUTTON
@@ -894,6 +913,9 @@ namespace login
             }
             else if (buttonUpdateState == 1 && buttonInsertState == 0)
             {
+                // load the user information
+                txtAuthor.Text = txtUserLoggedOn.Text; // load the user logged in
+                
                 // button layout
                 buttonInsert.Enabled = false;
                 buttonUpdate.Enabled = true;
@@ -916,7 +938,7 @@ namespace login
                 txtChangedFrom.Enabled = true;
                 txtChangedTo.Enabled = true;
                 txtPurpose.Enabled = true;
-                txtAuthor.Enabled = true;
+                txtAuthor.Enabled = false;
 
                 //color the individual Textboxes
                 txtId.BackColor = Color.FromArgb(224, 224, 224); // Id
@@ -1264,6 +1286,7 @@ namespace login
         {
             ((TextBox)sender).BackColor = Color.White;
         }
+
 
     }
 }

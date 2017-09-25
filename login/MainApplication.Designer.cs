@@ -42,8 +42,9 @@
             this.panelLeftTop = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.txtUserLoggedOn = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.WindowTextLabel = new System.Windows.Forms.Label();
+            this.labelLogout = new System.Windows.Forms.Label();
             this.panelLogout = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -171,10 +172,12 @@
             // 
             this.panelLeftTop.BackColor = System.Drawing.Color.Transparent;
             this.panelLeftTop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelLeftTop.BackgroundImage")));
+            this.panelLeftTop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.panelLeftTop.Controls.Add(this.panel1);
             this.panelLeftTop.Location = new System.Drawing.Point(3, 3);
+            this.panelLeftTop.Margin = new System.Windows.Forms.Padding(0);
             this.panelLeftTop.Name = "panelLeftTop";
-            this.panelLeftTop.Size = new System.Drawing.Size(222, 75);
+            this.panelLeftTop.Size = new System.Drawing.Size(342, 75);
             this.panelLeftTop.TabIndex = 10;
             // 
             // panel1
@@ -189,19 +192,35 @@
             this.panelTop.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panelTop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.panelTop.Controls.Add(this.txtUserLoggedOn);
             this.panelTop.Controls.Add(this.label4);
             this.panelTop.Controls.Add(this.MinimizeButton);
             this.panelTop.Controls.Add(this.MaxButton);
             this.panelTop.Controls.Add(this.CloserButton);
-            this.panelTop.Controls.Add(this.WindowTextLabel);
+            this.panelTop.Controls.Add(this.labelLogout);
             this.panelTop.Controls.Add(this.panelLogout);
-            this.panelTop.Location = new System.Drawing.Point(230, 3);
+            this.panelTop.Location = new System.Drawing.Point(356, 3);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(923, 75);
+            this.panelTop.Size = new System.Drawing.Size(797, 75);
             this.panelTop.TabIndex = 10;
             this.panelTop.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseDown);
             this.panelTop.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseMove);
             this.panelTop.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TopPanel_MouseUp);
+            // 
+            // txtUserLoggedOn
+            // 
+            this.txtUserLoggedOn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.txtUserLoggedOn.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txtUserLoggedOn.Font = new System.Drawing.Font("Consolas", 10.75F, System.Drawing.FontStyle.Bold);
+            this.txtUserLoggedOn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.txtUserLoggedOn.Location = new System.Drawing.Point(99, 15);
+            this.txtUserLoggedOn.Name = "txtUserLoggedOn";
+            this.txtUserLoggedOn.ReadOnly = true;
+            this.txtUserLoggedOn.Size = new System.Drawing.Size(378, 17);
+            this.txtUserLoggedOn.TabIndex = 102;
+            this.txtUserLoggedOn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseDown);
+            this.txtUserLoggedOn.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseMove);
+            this.txtUserLoggedOn.MouseUp += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseUp);
             // 
             // label4
             // 
@@ -214,27 +233,31 @@
             this.label4.TabIndex = 13;
             this.label4.Text = "stay close to your customer";
             // 
-            // WindowTextLabel
+            // labelLogout
             // 
-            this.WindowTextLabel.AutoSize = true;
-            this.WindowTextLabel.Location = new System.Drawing.Point(36, 14);
-            this.WindowTextLabel.Name = "WindowTextLabel";
-            this.WindowTextLabel.Size = new System.Drawing.Size(56, 18);
-            this.WindowTextLabel.TabIndex = 99;
-            this.WindowTextLabel.Text = "Logout";
-            this.WindowTextLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WindowTextLabel_MouseDown);
-            this.WindowTextLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WindowTextLabel_MouseMove);
-            this.WindowTextLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.WindowTextLabel_MouseUp);
+            this.labelLogout.AutoSize = true;
+            this.labelLogout.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.labelLogout.Location = new System.Drawing.Point(36, 14);
+            this.labelLogout.Name = "labelLogout";
+            this.labelLogout.Size = new System.Drawing.Size(64, 18);
+            this.labelLogout.TabIndex = 99;
+            this.labelLogout.Text = "Logout:";
+            this.labelLogout.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseDown);
+            this.labelLogout.MouseMove += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseMove);
+            this.labelLogout.MouseUp += new System.Windows.Forms.MouseEventHandler(this.labelLogout_MouseUp);
             // 
             // panelLogout
             // 
-            this.panelLogout.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panelLogout.BackgroundImage")));
+            this.panelLogout.BackgroundImage = global::login.Properties.Resources.BackgroundLogoutBtn;
             this.panelLogout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.panelLogout.Cursor = System.Windows.Forms.Cursors.Hand;
             this.panelLogout.Location = new System.Drawing.Point(5, 11);
             this.panelLogout.Name = "panelLogout";
             this.panelLogout.Size = new System.Drawing.Size(25, 25);
             this.panelLogout.TabIndex = 18;
             this.panelLogout.Click += new System.EventHandler(this.panelLogout_Click);
+            this.panelLogout.MouseLeave += new System.EventHandler(this.panelLogout_MouseLeave);
+            this.panelLogout.MouseHover += new System.EventHandler(this.panelLogout_MouseHover);
             // 
             // panel4
             // 
@@ -751,9 +774,9 @@
             this.buttonInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonInsert.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonInsert.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonInsert.Location = new System.Drawing.Point(555, 449);
+            this.buttonInsert.Location = new System.Drawing.Point(555, 429);
             this.buttonInsert.Name = "buttonInsert";
-            this.buttonInsert.Size = new System.Drawing.Size(110, 26);
+            this.buttonInsert.Size = new System.Drawing.Size(110, 46);
             this.buttonInsert.TabIndex = 109;
             this.buttonInsert.Text = "Insert New";
             this.buttonInsert.UseVisualStyleBackColor = false;
@@ -769,9 +792,9 @@
             this.buttonUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonUpdate.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonUpdate.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonUpdate.Location = new System.Drawing.Point(671, 449);
+            this.buttonUpdate.Location = new System.Drawing.Point(671, 429);
             this.buttonUpdate.Name = "buttonUpdate";
-            this.buttonUpdate.Size = new System.Drawing.Size(110, 26);
+            this.buttonUpdate.Size = new System.Drawing.Size(110, 46);
             this.buttonUpdate.TabIndex = 110;
             this.buttonUpdate.Text = "Update";
             this.buttonUpdate.UseVisualStyleBackColor = false;
@@ -787,9 +810,9 @@
             this.buttonDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDelete.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDelete.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.buttonDelete.Location = new System.Drawing.Point(787, 449);
+            this.buttonDelete.Location = new System.Drawing.Point(787, 429);
             this.buttonDelete.Name = "buttonDelete";
-            this.buttonDelete.Size = new System.Drawing.Size(110, 26);
+            this.buttonDelete.Size = new System.Drawing.Size(110, 46);
             this.buttonDelete.TabIndex = 111;
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = false;
@@ -858,7 +881,7 @@
             this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MinimizeButton.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold);
             this.MinimizeButton.ForeColor = System.Drawing.Color.White;
-            this.MinimizeButton.Location = new System.Drawing.Point(838, 10);
+            this.MinimizeButton.Location = new System.Drawing.Point(712, 10);
             this.MinimizeButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
             this.MinimizeButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
             this.MinimizeButton.Name = "MinimizeButton";
@@ -881,7 +904,7 @@
             this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.MaxButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold);
             this.MaxButton.ForeColor = System.Drawing.Color.White;
-            this.MaxButton.Location = new System.Drawing.Point(865, 10);
+            this.MaxButton.Location = new System.Drawing.Point(739, 10);
             this.MaxButton.Margin = new System.Windows.Forms.Padding(0);
             this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
             this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
@@ -889,7 +912,7 @@
             this.MaxButton.Size = new System.Drawing.Size(25, 25);
             this.MaxButton.TabIndex = 100;
             this.MaxButton.Text = "_";
-            this.MaxButton.TextLocation_X = 7;
+            this.MaxButton.TextLocation_X = 5;
             this.MaxButton.TextLocation_Y = 10;
             this.toolTip1.SetToolTip(this.MaxButton, "Maximize");
             this.MaxButton.UseVisualStyleBackColor = true;
@@ -905,7 +928,7 @@
             this.CloserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloserButton.Font = new System.Drawing.Font("Candara", 16F, System.Drawing.FontStyle.Bold);
             this.CloserButton.ForeColor = System.Drawing.Color.White;
-            this.CloserButton.Location = new System.Drawing.Point(892, 11);
+            this.CloserButton.Location = new System.Drawing.Point(766, 11);
             this.CloserButton.Margin = new System.Windows.Forms.Padding(0);
             this.CloserButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
             this.CloserButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
@@ -1012,7 +1035,7 @@
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Panel panelLeftTop;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Label WindowTextLabel;
+        private System.Windows.Forms.Label labelLogout;
         private System.Windows.Forms.Panel panelLogout;
         private login.ButtonZ CloserButton;
         private MinMaxButton MaxButton;
@@ -1077,5 +1100,6 @@
         private System.Windows.Forms.ComboBox comboDepartment;
         private System.Windows.Forms.ComboBox comboEnv;
         private System.Windows.Forms.ComboBox comboComponent;
+        private System.Windows.Forms.TextBox txtUserLoggedOn;
     }
 }

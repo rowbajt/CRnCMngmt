@@ -54,7 +54,8 @@ namespace login
             {
                 txtMessage.Visible = false;
 
-                MainApplication objCM_Main = new MainApplication();
+                // be aware that the txtUsername in the bracket is used to handover the login name to the MainApplication
+                MainApplication objCM_Main = new MainApplication(txtUsername.Text);
                 this.Hide();
                 objCM_Main.Show();
             }
