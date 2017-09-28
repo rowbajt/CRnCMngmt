@@ -1,0 +1,10 @@
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Release\login.exe.config
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Release\login.exe
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\bin\Release\login.pdb
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\CRMgmt.csprojResolveAssemblyReference.cache
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\login.MainApplication.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\login.LOGIN.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\login.Properties.Resources.resources
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\CRMgmt.csproj.GenerateResource.Cache
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\login.exe
+C:\Users\Robert Heiss\Documents\GitHub\CRnCMngmt\login\obj\Release\login.pdb

@@ -28,6 +28,7 @@ namespace login
             if (txtPassword.Text != "")
             {
                 txtMessage.Visible = false;
+                txtMessage.Enabled = false;
             }
         }
 
@@ -53,6 +54,7 @@ namespace login
             if (dtbl.Rows.Count == 1)
             {
                 txtMessage.Visible = false;
+                txtMessage.Enabled = false;
 
                 // be aware that the txtUsername in the bracket is used to handover the login name to the MainApplication
                 MainApplication objCM_Main = new MainApplication(txtUsername.Text);
@@ -65,6 +67,7 @@ namespace login
                 txtMessage.ForeColor = Color.Red;
                 txtMessage.TextAlign = HorizontalAlignment.Center;
                 txtMessage.Text = "Check your username and password";
+                txtMessage.Enabled = true;
                 txtMessage.Visible = true;
                                 
                 /// clear password field
@@ -78,6 +81,7 @@ namespace login
         {
             /// hide txtMessage
             txtMessage.Visible = false;
+            txtMessage.Enabled = false;
         }
 
         private void btnLogin_KeyDown(object sender, KeyEventArgs e)
