@@ -13,26 +13,16 @@ namespace login
 {
     public partial class LOGIN : Form
     {
-        ///localDbFile
-        ///SqlConnection sqlcon = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Databases\LoginDB\LoginDB.mdf;Integrated Security=True;Connect Timeout=30");
-        
         ///Mssql database
         SqlConnection sqlcon = new SqlConnection(@"Data Source=DESKTOP-V2G31EK\CMDATABASE;Initial Catalog=CustomerManagement;Integrated Security=True");
 
         public LOGIN()
         {
             InitializeComponent();
+            
+            // set the initial ForeColor of the button
+            LoginBtnState();
         }
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
-            if (txtPassword.Text != "")
-            {
-                txtMessage.Visible = false;
-                txtMessage.Enabled = false;
-            }
-        }
-
-        
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
@@ -53,8 +43,8 @@ namespace login
             /// check if login is successfull
             if (dtbl.Rows.Count == 1)
             {
-                txtMessage.Visible = false;
-                txtMessage.Enabled = false;
+                txtError.Visible = false;
+                txtError.Enabled = false;
 
                 // be aware that the txtUsername in the bracket is used to handover the login name to the MainApplication
                 MainApplication objCM_Main = new MainApplication(txtUsername.Text);
@@ -64,11 +54,11 @@ namespace login
             else
             {
                 /// MessageBox.Show("Check your username and password");
-                txtMessage.ForeColor = Color.Red;
-                txtMessage.TextAlign = HorizontalAlignment.Center;
-                txtMessage.Text = "Check your username and password";
-                txtMessage.Enabled = true;
-                txtMessage.Visible = true;
+                txtError.ForeColor = Color.Red;
+                txtError.TextAlign = HorizontalAlignment.Center;
+                txtError.Text = "Check your username and password";
+                txtError.Enabled = true;
+                txtError.Visible = true;
                                 
                 /// clear password field
                 txtPassword.Text = "";
@@ -77,11 +67,11 @@ namespace login
             sqlcon.Close();
         }
 
-        private void txtMessage_TextChanged(object sender, EventArgs e)
+        private void txtError_TextChanged(object sender, EventArgs e)
         {
             /// hide txtMessage
-            txtMessage.Visible = false;
-            txtMessage.Enabled = false;
+            txtError.Visible = false;
+            txtError.Enabled = false;
         }
 
         private void btnLogin_KeyDown(object sender, KeyEventArgs e)
@@ -110,6 +100,35 @@ namespace login
         {
             // The user wants to exit the application. Close everything down.
             Application.Exit();
+        }
+
+        private void LOGIN_Load(object sender, EventArgs e)
+        {
+
+        }
+        private void LoginBtnState()
+        {
+            if (String.IsNullOrEmpty(txtUsername.Text))
+            {
+                btnLogin.ForeColor = Color.Red;
+            }
+            else if (String.IsNullOrEmpty(txtPassword.Text))
+            {
+                btnLogin.ForeColor = Color.Red;
+            } else
+            {
+                btnLogin.ForeColor = Color.FromArgb(25,152,97);
+            }
+        }
+
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            LoginBtnState();
+        }
+
+        private void txtPassword_TextChanged(object sender, EventArgs e)
+        {
+            LoginBtnState();
         }
     }
 }

@@ -44,6 +44,9 @@
             this.panelTop = new System.Windows.Forms.Panel();
             this.txtUserLoggedOn = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.MinimizeButton = new login.ButtonZ();
+            this.MaxButton = new login.MinMaxButton();
+            this.CloserButton = new login.ButtonZ();
             this.labelLogout = new System.Windows.Forms.Label();
             this.panelLogout = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -104,9 +107,6 @@
             this.comboDepartment = new System.Windows.Forms.ComboBox();
             this.comboEnv = new System.Windows.Forms.ComboBox();
             this.comboComponent = new System.Windows.Forms.ComboBox();
-            this.MinimizeButton = new login.ButtonZ();
-            this.MaxButton = new login.MinMaxButton();
-            this.CloserButton = new login.ButtonZ();
             this.panelLeftTop.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_RecentChanges)).BeginInit();
@@ -232,6 +232,75 @@
             this.label4.Size = new System.Drawing.Size(224, 18);
             this.label4.TabIndex = 13;
             this.label4.Text = "stay close to your customer";
+            // 
+            // MinimizeButton
+            // 
+            this.MinimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MinimizeButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.MinimizeButton.DisplayText = "_";
+            this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MinimizeButton.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold);
+            this.MinimizeButton.ForeColor = System.Drawing.Color.White;
+            this.MinimizeButton.Location = new System.Drawing.Point(712, 10);
+            this.MinimizeButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.MinimizeButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.MinimizeButton.Name = "MinimizeButton";
+            this.MinimizeButton.Size = new System.Drawing.Size(25, 25);
+            this.MinimizeButton.TabIndex = 100;
+            this.MinimizeButton.Text = "_";
+            this.MinimizeButton.TextLocation_X = 2;
+            this.MinimizeButton.TextLocation_Y = -8;
+            this.toolTip1.SetToolTip(this.MinimizeButton, "Minimize");
+            this.MinimizeButton.UseVisualStyleBackColor = true;
+            this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
+            // 
+            // MaxButton
+            // 
+            this.MaxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.MaxButton.CFormState = login.MinMaxButton.CustomFormState.Normal;
+            this.MaxButton.DisplayText = "_";
+            this.MaxButton.FlatAppearance.BorderSize = 0;
+            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MaxButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold);
+            this.MaxButton.ForeColor = System.Drawing.Color.White;
+            this.MaxButton.Location = new System.Drawing.Point(739, 10);
+            this.MaxButton.Margin = new System.Windows.Forms.Padding(0);
+            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.MaxButton.Name = "MaxButton";
+            this.MaxButton.Size = new System.Drawing.Size(25, 25);
+            this.MaxButton.TabIndex = 100;
+            this.MaxButton.Text = "_";
+            this.MaxButton.TextLocation_X = 5;
+            this.MaxButton.TextLocation_Y = 10;
+            this.toolTip1.SetToolTip(this.MaxButton, "Maximize");
+            this.MaxButton.UseVisualStyleBackColor = true;
+            this.MaxButton.Click += new System.EventHandler(this.MaxButton_Click);
+            // 
+            // CloserButton
+            // 
+            this.CloserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloserButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.CloserButton.DisplayText = "X";
+            this.CloserButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.CloserButton.FlatAppearance.BorderSize = 2;
+            this.CloserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CloserButton.Font = new System.Drawing.Font("Candara", 16F, System.Drawing.FontStyle.Bold);
+            this.CloserButton.ForeColor = System.Drawing.Color.White;
+            this.CloserButton.Location = new System.Drawing.Point(766, 11);
+            this.CloserButton.Margin = new System.Windows.Forms.Padding(0);
+            this.CloserButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
+            this.CloserButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
+            this.CloserButton.Name = "CloserButton";
+            this.CloserButton.Size = new System.Drawing.Size(25, 25);
+            this.CloserButton.TabIndex = 101;
+            this.CloserButton.Text = "X";
+            this.CloserButton.TextLocation_X = 3;
+            this.CloserButton.TextLocation_Y = 0;
+            this.toolTip1.SetToolTip(this.CloserButton, "Close");
+            this.CloserButton.UseVisualStyleBackColor = true;
+            this.CloserButton.Click += new System.EventHandler(this.CloserButton_Click);
             // 
             // labelLogout
             // 
@@ -664,9 +733,9 @@
             this.labelChangedTo.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelChangedTo.Location = new System.Drawing.Point(764, 181);
             this.labelChangedTo.Name = "labelChangedTo";
-            this.labelChangedTo.Size = new System.Drawing.Size(77, 15);
+            this.labelChangedTo.Size = new System.Drawing.Size(91, 15);
             this.labelChangedTo.TabIndex = 109;
-            this.labelChangedTo.Text = "Changed To";
+            this.labelChangedTo.Text = "Changed To *";
             // 
             // labelPurpose
             // 
@@ -674,9 +743,9 @@
             this.labelPurpose.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPurpose.Location = new System.Drawing.Point(365, 273);
             this.labelPurpose.Name = "labelPurpose";
-            this.labelPurpose.Size = new System.Drawing.Size(56, 15);
+            this.labelPurpose.Size = new System.Drawing.Size(70, 15);
             this.labelPurpose.TabIndex = 109;
-            this.labelPurpose.Text = "Purpose";
+            this.labelPurpose.Text = "Purpose *";
             // 
             // labelFilterByEnvironment
             // 
@@ -872,75 +941,6 @@
             this.comboComponent.Name = "comboComponent";
             this.comboComponent.Size = new System.Drawing.Size(245, 25);
             this.comboComponent.TabIndex = 122;
-            // 
-            // MinimizeButton
-            // 
-            this.MinimizeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MinimizeButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.MinimizeButton.DisplayText = "_";
-            this.MinimizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MinimizeButton.Font = new System.Drawing.Font("Candara", 18F, System.Drawing.FontStyle.Bold);
-            this.MinimizeButton.ForeColor = System.Drawing.Color.White;
-            this.MinimizeButton.Location = new System.Drawing.Point(712, 10);
-            this.MinimizeButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.MinimizeButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.MinimizeButton.Name = "MinimizeButton";
-            this.MinimizeButton.Size = new System.Drawing.Size(25, 25);
-            this.MinimizeButton.TabIndex = 100;
-            this.MinimizeButton.Text = "_";
-            this.MinimizeButton.TextLocation_X = 2;
-            this.MinimizeButton.TextLocation_Y = -8;
-            this.toolTip1.SetToolTip(this.MinimizeButton, "Minimize");
-            this.MinimizeButton.UseVisualStyleBackColor = true;
-            this.MinimizeButton.Click += new System.EventHandler(this.MinimizeButton_Click);
-            // 
-            // MaxButton
-            // 
-            this.MaxButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.MaxButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.MaxButton.CFormState = login.MinMaxButton.CustomFormState.Normal;
-            this.MaxButton.DisplayText = "_";
-            this.MaxButton.FlatAppearance.BorderSize = 0;
-            this.MaxButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MaxButton.Font = new System.Drawing.Font("Candara", 20.25F, System.Drawing.FontStyle.Bold);
-            this.MaxButton.ForeColor = System.Drawing.Color.White;
-            this.MaxButton.Location = new System.Drawing.Point(739, 10);
-            this.MaxButton.Margin = new System.Windows.Forms.Padding(0);
-            this.MaxButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.MaxButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.MaxButton.Name = "MaxButton";
-            this.MaxButton.Size = new System.Drawing.Size(25, 25);
-            this.MaxButton.TabIndex = 100;
-            this.MaxButton.Text = "_";
-            this.MaxButton.TextLocation_X = 5;
-            this.MaxButton.TextLocation_Y = 10;
-            this.toolTip1.SetToolTip(this.MaxButton, "Maximize");
-            this.MaxButton.UseVisualStyleBackColor = true;
-            this.MaxButton.Click += new System.EventHandler(this.MaxButton_Click);
-            // 
-            // CloserButton
-            // 
-            this.CloserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloserButton.BZBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
-            this.CloserButton.DisplayText = "X";
-            this.CloserButton.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.CloserButton.FlatAppearance.BorderSize = 2;
-            this.CloserButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CloserButton.Font = new System.Drawing.Font("Candara", 16F, System.Drawing.FontStyle.Bold);
-            this.CloserButton.ForeColor = System.Drawing.Color.White;
-            this.CloserButton.Location = new System.Drawing.Point(766, 11);
-            this.CloserButton.Margin = new System.Windows.Forms.Padding(0);
-            this.CloserButton.MouseClickColor1 = System.Drawing.Color.FromArgb(((int)(((byte)(160)))), ((int)(((byte)(180)))), ((int)(((byte)(200)))));
-            this.CloserButton.MouseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(152)))), ((int)(((byte)(97)))));
-            this.CloserButton.Name = "CloserButton";
-            this.CloserButton.Size = new System.Drawing.Size(25, 25);
-            this.CloserButton.TabIndex = 101;
-            this.CloserButton.Text = "X";
-            this.CloserButton.TextLocation_X = 3;
-            this.CloserButton.TextLocation_Y = 0;
-            this.toolTip1.SetToolTip(this.CloserButton, "Close");
-            this.CloserButton.UseVisualStyleBackColor = true;
-            this.CloserButton.Click += new System.EventHandler(this.CloserButton_Click);
             // 
             // MainApplication
             // 
